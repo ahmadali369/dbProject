@@ -5,6 +5,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import pl.adminPanals.productCRUD.addProductPage;
+import pl.adminPanals.productCRUD.editProductPage;
+import transerferObjects.ProductTO;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -55,6 +60,9 @@ public class manageProductPage extends JFrame {
 		JButton addProductButton = new JButton("Add");
 		addProductButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				addProductPage frame = new addProductPage();
+				frame.setVisible(true);
 			}
 		});
 		addProductButton.setBounds(328, 28, 117, 29);
@@ -63,6 +71,9 @@ public class manageProductPage extends JFrame {
 		JButton editProductButton = new JButton("Edit");
 		editProductButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				editProductPage frame = new editProductPage(new ProductTO());
+				frame.setVisible(true);
 			}
 		});
 		editProductButton.setBounds(456, 28, 117, 29);

@@ -65,7 +65,7 @@ public class AdminLandingPage extends JFrame {
 		manageUsersButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				userActivityPage frame = new userActivityPage();
+				userPage frame = new userPage();
 				frame.setVisible(true);
 			}
 		});
