@@ -23,6 +23,7 @@ public class addProductPage extends JFrame {
 	private JTextField producttextField;
 	private JTextField pricetextField;
 	private JTextField quantitytextField;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -106,11 +107,11 @@ public class addProductPage extends JFrame {
 		contentPane.add(selectImgButton);
 		
 		JComboBox catagoryComboBox = new JComboBox();
-		catagoryComboBox.setBounds(390, 311, 91, 27);
+		catagoryComboBox.setBounds(390, 301, 91, 27);
 		contentPane.add(catagoryComboBox);
 		
 		JLabel lblNewLabel_1_2_1 = new JLabel("Catagory");
-		lblNewLabel_1_2_1.setBounds(300, 315, 61, 16);
+		lblNewLabel_1_2_1.setBounds(300, 305, 61, 16);
 		contentPane.add(lblNewLabel_1_2_1);
 		
 		JButton addProductButton = new JButton("Add Product");
@@ -126,7 +127,16 @@ public class addProductPage extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		addCatagoryButton.setBounds(503, 310, 148, 29);
+		addCatagoryButton.setBounds(503, 300, 148, 29);
 		contentPane.add(addCatagoryButton);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(391, 340, 70, 26);
+		contentPane.add(textField);
+		
+		JLabel lblNewLabel_1_2_2 = new JLabel("Cost");
+		lblNewLabel_1_2_2.setBounds(300, 344, 61, 16);
+		contentPane.add(lblNewLabel_1_2_2);
 	}
 }

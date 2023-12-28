@@ -39,7 +39,7 @@ public class AdminLandingPage extends JFrame {
 	 */
 	public AdminLandingPage() {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		setBounds(100, 100, 443, 179);
+		setBounds(100, 100, 567, 179);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -69,7 +69,7 @@ public class AdminLandingPage extends JFrame {
 				frame.setVisible(true);
 			}
 		});
-		manageUsersButton.setBounds(168, 78, 117, 29);
+		manageUsersButton.setBounds(297, 78, 117, 29);
 		contentPane.add(manageUsersButton);
 		
 		JButton salesReportButton = new JButton("Sales Report");
@@ -82,8 +82,19 @@ public class AdminLandingPage extends JFrame {
 			
 			
 		});
-		salesReportButton.setBounds(287, 78, 117, 29);
+		salesReportButton.setBounds(415, 78, 117, 29);
 		contentPane.add(salesReportButton);
+		
+		JButton manageOrdersButton = new JButton("Manage Orders");
+		manageOrdersButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				manageOrders frame = new manageOrders();
+				frame.setVisible(true);
+			}
+		});
+		manageOrdersButton.setBounds(166, 78, 126, 29);
+		contentPane.add(manageOrdersButton);
 	}
 
 }

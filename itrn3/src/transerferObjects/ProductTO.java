@@ -7,8 +7,15 @@ public class ProductTO {
 	String discription; 
 	Double priceDouble;
 	String catagory;
+	Double cost; 
 	
 	
+	public Double getCost() {
+		return cost;
+	}
+	public void setCost(Double cost) {
+		this.cost = cost;
+	}
 	public int getProductid() {
 		return productid;
 	}
