@@ -93,7 +93,28 @@ public class DBconfig {
 
             	statement.executeUpdate(createImagesTableSQL);
 
+/////==== cat
+                String createCategoryTableSQL = "CREATE TABLE IF NOT EXISTS Category (" +
+                        "CategoryID INT AUTO_INCREMENT PRIMARY KEY," +
+                        "CategoryName VARCHAR(255) NOT NULL" +
+                        ")";
 
+                statement.executeUpdate(createCategoryTableSQL);
+                
+                String[] dummyCategories = {"Electronics", "Clothing", "Books", "Home and Garden"};
+                String insertCategorySQL = "INSERT INTO Category (CategoryName) VALUES (?)";
+                try (PreparedStatement preparedStatement = connection.prepareStatement(insertCategorySQL)) {
+                    for (String categoryName : dummyCategories) {
+                        preparedStatement.setString(1, categoryName);
+
+                        int rowsAffected = preparedStatement.executeUpdate();
+
+                    }
+                }
+   /// cat ====             
+                
+            	
+            	
             String createProductTableSQL = "CREATE TABLE IF NOT EXISTS Product (" +
                     "ProductID INT AUTO_INCREMENT PRIMARY KEY," +
                     "Name VARCHAR(255)," +

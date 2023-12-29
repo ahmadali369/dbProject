@@ -246,12 +246,7 @@ public class UserLandingPage extends JFrame {
 			}
 		});
 
-//		
-//		panel.add(new ProductWidget(bllFacade)); 
-//		panel.add(new ProductWidget(bllFacade)); 
-//		panel.add(new ProductWidget(bllFacade)); 
-//		panel.add(new ProductWidget(bllFacade)); 
-//		panel.add(new ProductWidget(bllFacade)); 
+
 
 	}
 }
