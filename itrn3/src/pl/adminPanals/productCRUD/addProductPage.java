@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.font.ImageGraphicAttribute;
 import java.io.File;
 
 import javax.swing.ImageIcon;
@@ -35,6 +36,7 @@ public class addProductPage extends JFrame {
 	private JTextField costtextField;
 	private JFrame frame;
 	private IBLLFacade bllFacade;
+	private String imgPathString; 
 
 	/**
 	 * Launch the application.
@@ -123,6 +125,7 @@ public class addProductPage extends JFrame {
 
 				if (userSelection == JFileChooser.APPROVE_OPTION) {
 					File selectedFile = fileChooser.getSelectedFile();
+					imgPathString = selectedFile.toString(); 
 
 					int option = JOptionPane.showConfirmDialog(frame, "Is the chosen img is .jpg?", "img confirmation",
 							JOptionPane.YES_NO_OPTION);
@@ -195,17 +198,19 @@ public class addProductPage extends JFrame {
 				productTO.setCost(Double.parseDouble(costtextField.getText()));
 //				Double.parseDouble(pricetextField.getText())
 				
+				
+				productTO.setImgPathString(imgPathString);
 				productTO.setQuantity(Integer.parseInt(quantitytextField.getText()));
 				
 				
 				try {
 					bllFacade.addProduct(productTO);
+//					System.out.println("pl calls");
 				} catch (Exception e2) {
 					// TODO: handle exception
 					e2.printStackTrace(); 
 				}
-				
-				bllFacade.addProduct(productTO);
+
 				
 			}
 		});

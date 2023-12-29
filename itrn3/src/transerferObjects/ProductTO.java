@@ -9,7 +9,8 @@ public class ProductTO {
 	String catagory;
 	Double cost; 
 	int quantity; 
-	String imgString; 
+	String imgPathString;
+	int imgKey; 
 	
 	
 	public int getQuantity() {
@@ -18,11 +19,18 @@ public class ProductTO {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	public String getImgString() {
-		return imgString;
+
+	public String getImgPathString() {
+		return imgPathString;
 	}
-	public void setImgString(String imgString) {
-		this.imgString = imgString;
+	public void setImgPathString(String imgPathString) {
+		this.imgPathString = imgPathString;
+	}
+	public int getImgKey() {
+		return imgKey;
+	}
+	public void setImgKey(int imgKey) {
+		this.imgKey = imgKey;
 	}
 	public Double getCost() {
 		return cost;

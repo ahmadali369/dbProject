@@ -85,6 +85,13 @@ public class DBconfig {
 			String useDatabaseSQL = "USE " + DB_NAME;
 			statement.executeUpdate(useDatabaseSQL);
 
+            String createImagesTableSQL = "CREATE TABLE IF NOT EXISTS images (" +
+            	    "id INT AUTO_INCREMENT PRIMARY KEY," +
+            	    "image_data LONGBLOB" +
+
+            	    ")";
+
+            	statement.executeUpdate(createImagesTableSQL);
 
 
             String createProductTableSQL = "CREATE TABLE IF NOT EXISTS Product (" +
@@ -94,12 +101,19 @@ public class DBconfig {
                     "Price DECIMAL(10, 2)," +
                     "Quantity INT NOT NULL," +
                     "CategoryID INT," +
+                    "ImageID INT," +
                     "Cost DECIMAL(10, 2) NOT NULL," +
-                    "ImagePath VARCHAR(255)" +
-//                    "FOREIGN KEY (CategoryID) REFERENCES Category(CategoryID)" +
+                    "ImagePath VARCHAR(255)," +
+                    "FOREIGN KEY (ImageID) REFERENCES images(id)" +
                     ")";
 
             statement.executeUpdate(createProductTableSQL);
+            
+            
+            
+
+            
+            
 //
 //				String createPoemsTableSQL = "CREATE TABLE IF NOT EXISTS poems (" +
 //					    "id INT AUTO_INCREMENT PRIMARY KEY," +

@@ -23,6 +23,7 @@ public class DalFacade implements IDalFacade{
 	public void addProdcut(ProductTO productTO) throws SQLException {
 		// TODO Auto-generated method stub
 		dalPO.getProductDAO().addProdcut(productTO);
+
 		
 	}
 
