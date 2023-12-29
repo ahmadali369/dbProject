@@ -21,6 +21,7 @@ import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import bll.IBLLFacade;
 import pl.userPanals.ProductWidget;
 
 public class addProductPage extends JFrame {
@@ -32,27 +33,29 @@ public class addProductPage extends JFrame {
 	private JTextField quantitytextField;
 	private JTextField textField;
 	private JFrame frame;
+	private IBLLFacade bllFacade;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					addProductPage frame = new addProductPage();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					addProductPage frame = new addProductPage(bllFacade);
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
 	 */
-	public addProductPage() {
+	public addProductPage(IBLLFacade ibllFacade) {
+		bllFacade = ibllFacade; 
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 722, 501);
 		contentPane = new JPanel();

@@ -12,6 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
+import bll.IBLLFacade;
 import pl.login.UserSignUp;
 
 public class userPage extends JFrame {
@@ -19,6 +20,7 @@ public class userPage extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
+	private IBLLFacade bllFacade;
 
 	/**
 	 * Launch the application.
@@ -39,7 +41,8 @@ public class userPage extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public userPage() {
+	public userPage(IBLLFacade ibllFacade) {
+		bllFacade = ibllFacade; 
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 720, 540);
 		contentPane = new JPanel();
@@ -61,7 +64,7 @@ public class userPage extends JFrame {
 		addNewUserButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				UserSignUp frame = new UserSignUp();
+				UserSignUp frame = new UserSignUp(bllFacade);
 				frame.setVisible(true);
 			}
 		});
@@ -71,7 +74,7 @@ public class userPage extends JFrame {
 		JButton userAcitvityButton = new JButton("User Acitvity");
 		userAcitvityButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				userActivityPage frame = new userActivityPage();
+				userActivityPage frame = new userActivityPage(bllFacade);
 				frame.setVisible(true);
 			}
 		});

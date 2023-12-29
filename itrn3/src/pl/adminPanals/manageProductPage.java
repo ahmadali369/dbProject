@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import bll.IBLLFacade;
 import pl.adminPanals.productCRUD.addProductPage;
 import pl.adminPanals.productCRUD.editProductPage;
 import transerferObjects.ProductTO;
@@ -23,6 +24,7 @@ public class manageProductPage extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
+	private IBLLFacade bllFacade;
 
 	/**
 	 * Launch the application.
@@ -43,7 +45,8 @@ public class manageProductPage extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public manageProductPage() {
+	public manageProductPage(IBLLFacade bIbllFacade) {
+		bllFacade = bIbllFacade; 
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 726, 544);
 		contentPane = new JPanel();
@@ -61,7 +64,7 @@ public class manageProductPage extends JFrame {
 		addProductButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				addProductPage frame = new addProductPage();
+				addProductPage frame = new addProductPage(bllFacade);
 				frame.setVisible(true);
 			}
 		});
@@ -72,7 +75,7 @@ public class manageProductPage extends JFrame {
 		editProductButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				editProductPage frame = new editProductPage(new ProductTO());
+				editProductPage frame = new editProductPage(new ProductTO(), bllFacade);
 				frame.setVisible(true);
 			}
 		});

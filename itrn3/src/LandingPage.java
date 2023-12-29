@@ -12,6 +12,12 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import ParameterObjects.BllPo;
+import ParameterObjects.DalPO;
+import bll.BllFacade;
+import bll.IBLLFacade;
+import dal.DalFacade;
+import dal.IDalFacade;
 import pl.login.AdminLogin;
 import pl.login.UserLogin;
 
@@ -19,6 +25,7 @@ public class LandingPage extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private IBLLFacade bllFacade; 
 
 	/**
 	 * Launch the application.
@@ -27,7 +34,14 @@ public class LandingPage extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LandingPage frame = new LandingPage();
+					DalPO dalPO = new DalPO(); 
+					IDalFacade dalFacade = new DalFacade(dalPO); 
+					
+					BllPo bllPo = new BllPo(dalFacade); 
+					
+					IBLLFacade bllFacade = new BllFacade(bllPo); 
+					
+					LandingPage frame = new LandingPage(bllFacade);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,7 +53,9 @@ public class LandingPage extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public LandingPage() {
+	public LandingPage(IBLLFacade bllFacade) {
+		this.bllFacade = bllFacade; 
+		
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 890, 503);
 		contentPane = new JPanel();
@@ -57,7 +73,7 @@ public class LandingPage extends JFrame {
 		JButton userButton = new JButton("User");
 		userButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UserLogin frame = new UserLogin();
+				UserLogin frame = new UserLogin(bllFacade);
 				frame.setVisible(true);
 				
 			}
@@ -68,7 +84,7 @@ public class LandingPage extends JFrame {
 		JButton adminButton = new JButton("Admin");
 		adminButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AdminLogin frame = new AdminLogin();
+				AdminLogin frame = new AdminLogin(bllFacade);
 				frame.setVisible(true);
 				
 				

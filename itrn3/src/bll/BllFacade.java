@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.Map;
 
 import ParameterObjects.BllPo;
+import dal.IDalFacade;
 import transerferObjects.ProductTO;
 
 public class BllFacade implements IBLLFacade{
 
 	BllPo bllPo; 
 	
+
 	
 	public BllFacade(BllPo bllPo) {
 		

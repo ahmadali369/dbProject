@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import bll.IBLLFacade;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JScrollPane;
@@ -18,6 +21,7 @@ public class PlaceOrder extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private IBLLFacade bllFacade;
 
 	/**
 	 * Launch the application.
@@ -38,7 +42,8 @@ public class PlaceOrder extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PlaceOrder() {
+	public PlaceOrder(IBLLFacade ibllFacade) {
+		bllFacade = ibllFacade; 
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 741, 626);
 		contentPane = new JPanel();

@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import bll.IBLLFacade;
 import pl.userPanals.UserLandingPage;
 
 import javax.swing.JLabel;
@@ -25,6 +26,7 @@ public class UserSignUp extends JFrame {
 	private JTextField addresstextField;
 	private JTextField passwordtextField;
 	private JTextField rePasswordtextField;
+	private IBLLFacade bllFacade;
 
 	/**
 	 * Launch the application.
@@ -45,7 +47,9 @@ public class UserSignUp extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public UserSignUp() {
+	public UserSignUp(IBLLFacade bIbllFacade) {
+		bllFacade = bIbllFacade; 
+		
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 622, 336);
 		contentPane = new JPanel();
@@ -116,7 +120,7 @@ public class UserSignUp extends JFrame {
 		JButton adminSignupButton = new JButton("SignUp");
 		adminSignupButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UserLandingPage frame = new UserLandingPage();
+				UserLandingPage frame = new UserLandingPage(bllFacade);
 				frame.setVisible(true);
 			}
 		});

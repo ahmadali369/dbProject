@@ -2,15 +2,20 @@ package ParameterObjects;
 
 import bll.IProductBLO;
 import bll.ProductBLO;
+import dal.DalFacade;
+import dal.IDalFacade;
 
 public class BllPo {
 
+//	IDalFacade dalFacade; 
+	
 	
 	IProductBLO productBLO; 
 	
-	public BllPo() {
+	
+	public BllPo(IDalFacade dalFacade) {
 		
-		productBLO = new ProductBLO();
+		productBLO = new ProductBLO(dalFacade);
 		
 	}
 

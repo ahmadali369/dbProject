@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import bll.IBLLFacade;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JScrollPane;
@@ -18,6 +21,7 @@ public class userActivityPage extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
+	private IBLLFacade bllFacade;
 
 	/**
 	 * Launch the application.
@@ -38,7 +42,8 @@ public class userActivityPage extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public userActivityPage() {
+	public userActivityPage(IBLLFacade bIbllFacade) {
+		bllFacade = bIbllFacade; 
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 710, 529);
 		contentPane = new JPanel();

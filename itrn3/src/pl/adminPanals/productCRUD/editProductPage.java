@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 
+import bll.IBLLFacade;
 import transerferObjects.ProductTO;
 
 public class editProductPage extends JFrame {
@@ -24,6 +25,7 @@ public class editProductPage extends JFrame {
 	private JTextField producttextField;
 	private JTextField pricetextField;
 	private JTextField quantitytextField;
+	private IBLLFacade bllFacade;
 
 	/**
 	 * Launch the application.
@@ -44,7 +46,8 @@ public class editProductPage extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public editProductPage(ProductTO productTO) {
+	public editProductPage(ProductTO productTO, IBLLFacade bIbllFacade) {
+		bllFacade = bIbllFacade; 
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 722, 501);
 		contentPane = new JPanel();

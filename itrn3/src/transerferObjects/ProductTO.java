@@ -8,8 +8,22 @@ public class ProductTO {
 	Double priceDouble;
 	String catagory;
 	Double cost; 
+	int quantity; 
+	String imgString; 
 	
 	
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+	public String getImgString() {
+		return imgString;
+	}
+	public void setImgString(String imgString) {
+		this.imgString = imgString;
+	}
 	public Double getCost() {
 		return cost;
 	}

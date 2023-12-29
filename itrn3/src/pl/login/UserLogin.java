@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import bll.IBLLFacade;
 import pl.userPanals.UserLandingPage;
 
 import javax.swing.JTextField;
@@ -21,6 +22,7 @@ public class UserLogin extends JFrame {
 	private JPanel contentPane;
 	private JTextField userNametextField;
 	private JTextField userPasswordtextField;
+	private IBLLFacade bllFacade;
 
 	/**
 	 * Launch the application.
@@ -41,7 +43,8 @@ public class UserLogin extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public UserLogin() {
+	public UserLogin(IBLLFacade bIbllFacade) {
+		bllFacade = bIbllFacade; 
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -72,7 +75,7 @@ public class UserLogin extends JFrame {
 		userLoginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				UserLandingPage frame = new UserLandingPage();
+				UserLandingPage frame = new UserLandingPage(bllFacade);
 				frame.setVisible(true);
 			}
 		});
@@ -83,7 +86,7 @@ public class UserLogin extends JFrame {
 		userSignupButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				UserSignUp frame = new UserSignUp();
+				UserSignUp frame = new UserSignUp(bllFacade);
 				frame.setVisible(true);
 			}
 		});

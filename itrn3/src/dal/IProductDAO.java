@@ -14,6 +14,7 @@ public interface IProductDAO {
 	public void addProdcut(ProductTO productTO) throws SQLException;
 
 	public List<Map<String, Object>> getAllProduct() throws SQLException;
+	
 	public List<Map<String, Object>> getAllProdcutsByCatagory() throws SQLException;
 
 	public void updateProduct(ProductTO productTO) throws SQLException;

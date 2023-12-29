@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import bll.IBLLFacade;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -19,6 +22,7 @@ public class salesReportPage extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	private JTable table_1;
+	private IBLLFacade bllFacade;
 
 	/**
 	 * Launch the application.
@@ -39,7 +43,8 @@ public class salesReportPage extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public salesReportPage() {
+	public salesReportPage(IBLLFacade bIbllFacade) {
+		bllFacade = bIbllFacade; 
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 728, 688);
 		contentPane = new JPanel();

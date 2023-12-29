@@ -11,16 +11,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 
+import bll.IBLLFacade;
 import net.miginfocom.swing.MigLayout;
 
 public class ProductWidget extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	private IBLLFacade bllFacade;
 
 	/**
 	 * Create the panel.
 	 */
-	public ProductWidget() {
+	public ProductWidget(IBLLFacade ibllFacade) {
+		bllFacade = ibllFacade; 
 		setBorder(null);
 		
 //		JPanel productWidget = new JPanel();

@@ -101,6 +101,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import bll.IBLLFacade;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -126,28 +129,29 @@ public class UserLandingPage extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-
+	private IBLLFacade bllFacade;
 	/**
 	 * Launch the application.
 	 */
 	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					UserLandingPage frame = new UserLandingPage();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					UserLandingPage frame = new UserLandingPage(bllFacade);
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
 	 */
-	public UserLandingPage() {
+	public UserLandingPage(IBLLFacade ibllFacade) {
+		bllFacade = ibllFacade; 
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 987, 619);
 		contentPane = new JPanel();
@@ -184,7 +188,7 @@ public class UserLandingPage extends JFrame {
 		JButton btnPlaceOrder = new JButton("Place Order");
 		btnPlaceOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PlaceOrder frame = new PlaceOrder();
+				PlaceOrder frame = new PlaceOrder(bllFacade);
 				frame.setVisible(true);
 				
 			}
@@ -196,7 +200,7 @@ public class UserLandingPage extends JFrame {
 		orderHIstoryButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				orderHistory frame = new orderHistory();
+				orderHistory frame = new orderHistory(bllFacade);
 				frame.setVisible(true);
 			}
 		});
@@ -213,11 +217,11 @@ public class UserLandingPage extends JFrame {
 		
 		
 		
-		panel.add(new ProductWidget()); 
-		panel.add(new ProductWidget()); 
-		panel.add(new ProductWidget()); 
-		panel.add(new ProductWidget()); 
-		panel.add(new ProductWidget()); 
+		panel.add(new ProductWidget(bllFacade)); 
+		panel.add(new ProductWidget(bllFacade)); 
+		panel.add(new ProductWidget(bllFacade)); 
+		panel.add(new ProductWidget(bllFacade)); 
+		panel.add(new ProductWidget(bllFacade)); 
 
 
 	}

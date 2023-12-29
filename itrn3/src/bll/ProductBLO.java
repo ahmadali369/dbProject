@@ -3,10 +3,19 @@ package bll;
 import java.util.List;
 import java.util.Map;
 
+import dal.IDalFacade;
 import transerferObjects.ProductTO;
 
 public class ProductBLO implements IProductBLO{
 
+	IDalFacade dalFacade; 
+	
+	public ProductBLO(IDalFacade dalFacade) {
+		this.dalFacade = dalFacade; 
+		
+	}
+	
+	
 	@Override
 	public void addProduct(ProductTO productTO) {
 		// TODO Auto-generated method stub
