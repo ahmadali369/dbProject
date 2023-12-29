@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -132,9 +134,35 @@ public class ProductDAO implements IProductDAO {
 
 	@Override
 	public List<Map<String, Object>> getAllProduct() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	    List<Map<String, Object>> products = new ArrayList<>();
+
+	    try (Connection connection = dbconnection.getConnection()) {
+	        String selectAllProductsSQL = "SELECT * FROM Product";
+
+	        try (PreparedStatement preparedStatement = connection.prepareStatement(selectAllProductsSQL)) {
+	            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+	                while (resultSet.next()) {
+	                    Map<String, Object> product = new HashMap<>();
+	                    int productId = resultSet.getInt("ProductID");
+	                    product.put("productId", productId);
+	                    product.put("name", resultSet.getString("Name"));
+	                    product.put("description", resultSet.getString("Description"));
+	                    product.put("price", resultSet.getBigDecimal("Price"));
+	                    product.put("quantity", resultSet.getInt("Quantity"));
+	                    product.put("categoryId", resultSet.getInt("CategoryID"));
+	                    product.put("imageId", resultSet.getInt("ImageID"));
+	                    product.put("cost", resultSet.getBigDecimal("Cost"));
+	                    product.put("imagePath", resultSet.getString("ImagePath"));
+
+	                    products.add(product);
+	                }
+	            }
+	        }
+	    }
+
+	    return products;
 	}
+
 
 	@Override
 	public void updateProduct(ProductTO productTO) throws SQLException {

@@ -89,41 +89,25 @@
 //    }
 //}
 
-
-
-
-
-
 package pl.userPanals;
 
-import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import bll.IBLLFacade;
-
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JButton;
-import javax.swing.JTextPane;
-import javax.swing.JCheckBox;
-import java.awt.Color;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JScrollPane;
-import java.awt.GridLayout;
-import java.awt.GridBagLayout;
-import java.awt.CardLayout;
-import net.miginfocom.swing.MigLayout;
-import java.awt.FlowLayout;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JSplitPane;
-import javax.swing.JScrollBar;
-import javax.swing.JToolBar;
-import javax.swing.ScrollPaneConstants;
+import transerferObjects.ProductTO;
 
 public class UserLandingPage extends JFrame {
 
@@ -133,7 +117,7 @@ public class UserLandingPage extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	
+
 //	public static void main(String[] args) {
 //		EventQueue.invokeLater(new Runnable() {
 //			public void run() {
@@ -151,7 +135,7 @@ public class UserLandingPage extends JFrame {
 	 * Create the frame.
 	 */
 	public UserLandingPage(IBLLFacade ibllFacade) {
-		bllFacade = ibllFacade; 
+		bllFacade = ibllFacade;
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 987, 619);
 		contentPane = new JPanel();
@@ -159,16 +143,17 @@ public class UserLandingPage extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblNewLabel = new JLabel("Home Page");
 		lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		lblNewLabel.setBounds(32, 26, 101, 25);
 		contentPane.add(lblNewLabel);
-		
-		JButton btnNewButton = new JButton("Reload");
-		btnNewButton.setBounds(735, 26, 117, 29);
-		contentPane.add(btnNewButton);
-		
+
+		JButton reloadButton = new JButton("Reload");
+
+		reloadButton.setBounds(735, 26, 117, 29);
+		contentPane.add(reloadButton);
+
 		JButton btnAddToCart = new JButton("Add to Cart");
 		btnAddToCart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -176,59 +161,93 @@ public class UserLandingPage extends JFrame {
 		});
 		btnAddToCart.setBounds(348, 26, 117, 29);
 		contentPane.add(btnAddToCart);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("Cart: ");
 		lblNewLabel_1.setBounds(875, 30, 34, 16);
 		contentPane.add(lblNewLabel_1);
-		
+
 		JLabel lblNewLabel_2 = new JLabel("0");
 		lblNewLabel_2.setBounds(912, 30, 32, 16);
 		contentPane.add(lblNewLabel_2);
-		
+
 		JButton btnPlaceOrder = new JButton("Place Order");
 		btnPlaceOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				PlaceOrder frame = new PlaceOrder(bllFacade);
 				frame.setVisible(true);
-				
+
 			}
 		});
 		btnPlaceOrder.setBounds(477, 26, 117, 29);
 		contentPane.add(btnPlaceOrder);
-		
+
 		JButton orderHIstoryButton = new JButton("Order History");
 		orderHIstoryButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				orderHistory frame = new orderHistory(bllFacade);
 				frame.setVisible(true);
 			}
 		});
 		orderHIstoryButton.setBounds(606, 26, 117, 29);
 		contentPane.add(orderHIstoryButton);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(32, 63, 931, 515);
 		contentPane.add(scrollPane);
-		
+
 		JPanel panel = new JPanel();
 		scrollPane.setViewportView(panel);
 		panel.setLayout(new GridLayout(0, 2, 20, 20));
-		
-		
-		
-		panel.add(new ProductWidget(bllFacade)); 
-		panel.add(new ProductWidget(bllFacade)); 
-		panel.add(new ProductWidget(bllFacade)); 
-		panel.add(new ProductWidget(bllFacade)); 
-		panel.add(new ProductWidget(bllFacade)); 
 
+		reloadButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				List<Map<String, Object>> products = bllFacade.getAllProdcuts();
+
+				if (!products.isEmpty()) {
+
+					for (Map<String, Object> product : products) {
+
+						ProductTO productTO = new ProductTO();
+						
+						productTO.setName((String)product.get("name"));
+						
+						
+						
+						BigDecimal bigDecimalValue = new BigDecimal(product.get("price").toString());
+						Double price = bigDecimalValue.doubleValue();
+						
+						
+						productTO.setPriceDouble(price);
+						productTO.setDiscription((String)product.get("description"));
+//						productTO.setProductid(ABORT);
+						
+//						(String)product.get("description"); 
+//						(Double)product.get("price"); 
+						
+						
+						
+						panel.add(new ProductWidget(productTO));
+						
+						panel.revalidate(); 
+						panel.repaint(); 
+
+					}
+
+				} else {
+					System.out.println("no products found");
+				}
+
+			}
+		});
+
+//		
+//		panel.add(new ProductWidget(bllFacade)); 
+//		panel.add(new ProductWidget(bllFacade)); 
+//		panel.add(new ProductWidget(bllFacade)); 
+//		panel.add(new ProductWidget(bllFacade)); 
+//		panel.add(new ProductWidget(bllFacade)); 
 
 	}
 }
-
-
-
-
-
-
