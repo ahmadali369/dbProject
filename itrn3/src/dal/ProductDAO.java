@@ -45,6 +45,8 @@ public class ProductDAO implements IProductDAO{
 			}
 		} catch (SQLException e) {
 
+			e.printStackTrace();
+			
 //			logger.debug("InsetBook Func thrown an Exception");
 
 			if (connection != null) {

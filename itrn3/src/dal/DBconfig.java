@@ -89,9 +89,9 @@ public class DBconfig {
 
             String createProductTableSQL = "CREATE TABLE IF NOT EXISTS Product (" +
                     "ProductID INT AUTO_INCREMENT PRIMARY KEY," +
-                    "Name VARCHAR(255) NOT NULL," +
+                    "Name VARCHAR(255)," +
                     "Description VARCHAR(255)," +
-                    "Price DECIMAL(10, 2) NOT NULL," +
+                    "Price DECIMAL(10, 2)," +
                     "Quantity INT NOT NULL," +
                     "CategoryID INT," +
                     "Cost DECIMAL(10, 2) NOT NULL," +

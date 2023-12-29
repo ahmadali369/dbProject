@@ -23,6 +23,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import bll.IBLLFacade;
 import pl.userPanals.ProductWidget;
+import transerferObjects.ProductTO;
 
 public class addProductPage extends JFrame {
 
@@ -31,7 +32,7 @@ public class addProductPage extends JFrame {
 	private JTextField producttextField;
 	private JTextField pricetextField;
 	private JTextField quantitytextField;
-	private JTextField textField;
+	private JTextField costtextField;
 	private JFrame frame;
 	private IBLLFacade bllFacade;
 
@@ -186,6 +187,26 @@ public class addProductPage extends JFrame {
 		JButton addProductButton = new JButton("Add Product");
 		addProductButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ProductTO productTO = new ProductTO(); 
+				
+				productTO.setName(producttextField.getText());
+				productTO.setPriceDouble(Double.parseDouble(pricetextField.getText()));
+				productTO.setDiscription(discriptiontextPane.getText());
+				productTO.setCost(Double.parseDouble(costtextField.getText()));
+//				Double.parseDouble(pricetextField.getText())
+				
+				productTO.setQuantity(Integer.parseInt(quantitytextField.getText()));
+				
+				
+				try {
+					bllFacade.addProduct(productTO);
+				} catch (Exception e2) {
+					// TODO: handle exception
+					e2.printStackTrace(); 
+				}
+				
+				bllFacade.addProduct(productTO);
+				
 			}
 		});
 		addProductButton.setBounds(311, 410, 117, 29);
@@ -199,10 +220,10 @@ public class addProductPage extends JFrame {
 		addCatagoryButton.setBounds(503, 300, 148, 29);
 		contentPane.add(addCatagoryButton);
 
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(391, 340, 70, 26);
-		contentPane.add(textField);
+		costtextField = new JTextField();
+		costtextField.setColumns(10);
+		costtextField.setBounds(391, 340, 70, 26);
+		contentPane.add(costtextField);
 
 		JLabel lblNewLabel_1_2_2 = new JLabel("Cost");
 		lblNewLabel_1_2_2.setBounds(300, 344, 61, 16);
