@@ -9,6 +9,9 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class userActivityPage extends JFrame {
 
@@ -55,6 +58,13 @@ public class userActivityPage extends JFrame {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		
+		JButton reloadButton = new JButton("reload");
+		reloadButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		reloadButton.setBounds(571, 27, 117, 29);
+		contentPane.add(reloadButton);
 	}
-
 }
