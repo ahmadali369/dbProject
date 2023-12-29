@@ -44,11 +44,13 @@ public class ProductWidget extends JPanel {
 		imgPanel.setBackground(Color.WHITE);
 		add(imgPanel, "cell 0 0 1 5,grow");
 		
-        String imagePath = "/img1.jpg";
+//        String imagePath = "/img1.jpg";
         
         try {
 
-            ImageIcon originalIcon = new ImageIcon(ProductWidget.class.getResource(imagePath));
+        	
+        	
+            ImageIcon originalIcon = new ImageIcon(productTO.getImgBytes());
 
             Image originalImage = originalIcon.getImage();
 
@@ -67,6 +69,7 @@ public class ProductWidget extends JPanel {
         	
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 			System.out.println("img not loaded");
 //			e.printStackTrace();
 		}

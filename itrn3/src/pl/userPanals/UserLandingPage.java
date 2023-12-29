@@ -221,6 +221,10 @@ public class UserLandingPage extends JFrame {
 						
 						productTO.setPriceDouble(price);
 						productTO.setDiscription((String)product.get("description"));
+						productTO.setImgBytes((byte[])product.get("imgBytes"));
+						
+						
+						
 //						productTO.setProductid(ABORT);
 						
 //						(String)product.get("description"); 
