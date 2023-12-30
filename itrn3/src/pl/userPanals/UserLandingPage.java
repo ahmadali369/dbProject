@@ -151,27 +151,6 @@ public class UserLandingPage extends JFrame {
 		lblNewLabel.setBounds(32, 26, 101, 25);
 		contentPane.add(lblNewLabel);
 
-//		JButton reloadButton = new JButton("Reload");
-//
-//		reloadButton.setBounds(735, 26, 117, 29);
-//		contentPane.add(reloadButton);
-
-		JButton btnAddToCart = new JButton("Add to Cart");
-		btnAddToCart.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnAddToCart.setBounds(348, 26, 117, 29);
-		contentPane.add(btnAddToCart);
-
-		JLabel lblNewLabel_1 = new JLabel("Cart: ");
-		lblNewLabel_1.setBounds(875, 30, 34, 16);
-		contentPane.add(lblNewLabel_1);
-
-		JLabel lblNewLabel_2 = new JLabel("0");
-		lblNewLabel_2.setBounds(912, 30, 32, 16);
-		contentPane.add(lblNewLabel_2);
-
 		JButton btnPlaceOrder = new JButton("Place Order");
 		btnPlaceOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -180,7 +159,7 @@ public class UserLandingPage extends JFrame {
 
 			}
 		});
-		btnPlaceOrder.setBounds(477, 26, 117, 29);
+		btnPlaceOrder.setBounds(677, 26, 117, 29);
 		contentPane.add(btnPlaceOrder);
 
 		JButton orderHIstoryButton = new JButton("Order History");
@@ -191,7 +170,7 @@ public class UserLandingPage extends JFrame {
 				frame.setVisible(true);
 			}
 		});
-		orderHIstoryButton.setBounds(606, 26, 117, 29);
+		orderHIstoryButton.setBounds(806, 26, 117, 29);
 		contentPane.add(orderHIstoryButton);
 
 		JScrollPane scrollPane = new JScrollPane();
