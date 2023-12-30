@@ -1,7 +1,9 @@
 package ParameterObjects;
 
+import bll.Cart;
 import bll.CatagoryBLO;
 import bll.ProductBLO;
+import bll.Interfaces.ICart;
 import bll.Interfaces.ICatagoryBLO;
 import bll.Interfaces.IProductBLO;
 import dal.DalFacade;
@@ -14,12 +16,14 @@ public class BllPo {
 	
 	IProductBLO productBLO; 
 	ICatagoryBLO catagoryBLO; 
+	ICart cart; 
 	
 	
 	public BllPo(IDalFacade dalFacade) {
 		
 		productBLO = new ProductBLO(dalFacade);
 		catagoryBLO = new CatagoryBLO(dalFacade); 
+		cart = new Cart(); 
 		
 	}
 
@@ -37,6 +41,14 @@ public class BllPo {
 
 	public void setProductBLO(IProductBLO productBLO) {
 		this.productBLO = productBLO;
+	}
+
+	public ICart getCart() {
+		return cart;
+	}
+
+	public void setCart(ICart cart) {
+		this.cart = cart;
 	}
 	
 	

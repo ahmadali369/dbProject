@@ -77,4 +77,33 @@ public class BllFacade implements IBLLFacade{
 		return bllPo.getCatagoryBLO().getAllCatagoriesList();
 	}
 
+
+
+
+	@Override
+	public void addToCart(ProductTO productTO) {
+		// TODO Auto-generated method stub
+		bllPo.getCart().addToCart(productTO);
+		
+	}
+
+
+
+
+	@Override
+	public List<ProductTO> getCartProducts() {
+		// TODO Auto-generated method stub
+		return bllPo.getCart().getCartProducts();
+	}
+
+
+
+
+	@Override
+	public void removeFromCart(ProductTO productTO) {
+		// TODO Auto-generated method stub
+		bllPo.getCart().removeFromCart(productTO);
+		
+	}
+
 }

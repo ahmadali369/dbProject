@@ -16,6 +16,7 @@ import javax.swing.JTextPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.GridLayout;
 
 public class PlaceOrder extends JFrame {
 
@@ -60,6 +61,10 @@ public class PlaceOrder extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(28, 84, 370, 495);
 		contentPane.add(scrollPane);
+		
+		JPanel panel = new JPanel();
+		scrollPane.setViewportView(panel);
+		panel.setLayout(new GridLayout(0, 1, 20, 20));
 		
 		JLabel lblNewLabel_1 = new JLabel("Order Details");
 		lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
