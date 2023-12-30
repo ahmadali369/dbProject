@@ -181,7 +181,6 @@ public class UserLandingPage extends JFrame {
 		scrollPane.setViewportView(panel);
 		panel.setLayout(new GridLayout(0, 2, 20, 20));
 
-
 		if (!products.isEmpty()) {
 
 			for (Map<String, Object> product : products) {
@@ -197,7 +196,7 @@ public class UserLandingPage extends JFrame {
 				productTO.setDiscription((String) product.get("description"));
 				productTO.setImgBytes((byte[]) product.get("imgBytes"));
 
-				panel.add(new ProductWidget(productTO));
+				panel.add(new ProductWidget(productTO, bllFacade, false));
 
 				panel.revalidate();
 				panel.repaint();
@@ -207,11 +206,7 @@ public class UserLandingPage extends JFrame {
 		} else {
 			System.out.println("no products found");
 		}
-		
-		
-		
-		
-		
+
 //		
 //		reloadButton.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e) {
