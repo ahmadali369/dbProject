@@ -4,10 +4,12 @@ import bll.CartBLO;
 import bll.CatagoryBLO;
 import bll.OrderBLO;
 import bll.ProductBLO;
+import bll.UserBLO;
 import bll.Interfaces.ICartBLO;
 import bll.Interfaces.ICatagoryBLO;
 import bll.Interfaces.IOrderBLO;
 import bll.Interfaces.IProductBLO;
+import bll.Interfaces.IUserBLO;
 import dal.DalFacade;
 import dal.Interfaces.IDalFacade;
 
@@ -19,7 +21,8 @@ public class BllPo {
 	IProductBLO productBLO; 
 	ICatagoryBLO catagoryBLO; 
 	ICartBLO cart; 
-	IOrderBLO order; 
+	IOrderBLO order;
+	IUserBLO userBLO; 
 	
 	
 	public BllPo(IDalFacade dalFacade) {
@@ -28,7 +31,16 @@ public class BllPo {
 		catagoryBLO = new CatagoryBLO(dalFacade); 
 		cart = new CartBLO(); 
 		order = new OrderBLO(dalFacade); 
+		userBLO = new UserBLO(dalFacade); 
 		
+	}
+
+	public IUserBLO getUserBLO() {
+		return userBLO;
+	}
+
+	public void setUserBLO(IUserBLO userBLO) {
+		this.userBLO = userBLO;
 	}
 
 	public ICatagoryBLO getCatagoryBLO() {

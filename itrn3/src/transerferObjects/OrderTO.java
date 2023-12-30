@@ -5,8 +5,17 @@ import java.util.List;
 public class OrderTO {
 
 	int id; 
+	int customerID; 
 	List<ProductTO> productList;
 	String shippingAddress;
+	String status; 
+	
+	public int getCustomerID() {
+		return customerID;
+	}
+	public void setCustomerID(int customerID) {
+		this.customerID = customerID;
+	}
 	public int getId() {
 		return id;
 	}
@@ -24,6 +33,12 @@ public class OrderTO {
 	}
 	public void setShippingAddress(String shippingAddress) {
 		this.shippingAddress = shippingAddress;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 	

@@ -1,11 +1,20 @@
 package bll.Interfaces;
 
-import transerferObjects.UserNewTO;
-import transerferObjects.UserOldTO;
+import java.util.List;
+import java.util.Map;
+
+import transerferObjects.ActivityTO;
+//import transerferObjects.UserNewTO;
+import transerferObjects.UserTO;
 
 public interface IUserBLO {
 
-	void addNewUser(UserNewTO userNewTO);
-	void loginUser(UserOldTO userOldTO); 
+	boolean addNewUser(UserTO userNewTO);
+	boolean loginUser(UserTO userOldTO); 
+	void storeUserActivity(ActivityTO activityTO); 
+	List<Map<String, Object>> getAllUsers(); 
+	void deleteUser(int id); 
+	
+	
 	
 }

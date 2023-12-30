@@ -6,9 +6,11 @@ import java.util.Map;
 import ParameterObjects.BllPo;
 import bll.Interfaces.IBLLFacade;
 import dal.Interfaces.IDalFacade;
+import transerferObjects.ActivityTO;
 import transerferObjects.CatagoryTO;
 import transerferObjects.OrderTO;
 import transerferObjects.ProductTO;
+import transerferObjects.UserTO;
 
 public class BllFacade implements IBLLFacade {
 
@@ -110,6 +112,37 @@ public class BllFacade implements IBLLFacade {
 	public List<Map<String, Object>> getOrdersByStatusAndCustormerId(String status, int custId) {
 		// TODO Auto-generated method stub
 		return bllPo.getOrder().getOrdersByStatusAndCustormerId(status, custId);
+	}
+
+	@Override
+	public boolean addNewUser(UserTO userNewTO) {
+		// TODO Auto-generated method stub
+		return bllPo.getUserBLO().addNewUser(userNewTO);
+	}
+
+	@Override
+	public boolean loginUser(UserTO userOldTO) {
+		// TODO Auto-generated method stub
+		return bllPo.getUserBLO().loginUser(userOldTO);
+	}
+
+	@Override
+	public void storeUserActivity(ActivityTO activityTO) {
+		// TODO Auto-generated method stub
+		bllPo.getUserBLO().storeUserActivity(activityTO);
+		
+	}
+
+	@Override
+	public List<Map<String, Object>> getAllUsers() {
+		// TODO Auto-generated method stub
+		return bllPo.getUserBLO().getAllUsers();
+	}
+
+	@Override
+	public void deleteUser(int id) {
+		// TODO Auto-generated method stub
+		bllPo.getUserBLO().deleteUser(id);
 	}
 
 }

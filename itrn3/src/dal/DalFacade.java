@@ -6,9 +6,11 @@ import java.util.Map;
 
 import ParameterObjects.DalPO;
 import dal.Interfaces.IDalFacade;
+import transerferObjects.ActivityTO;
 import transerferObjects.CatagoryTO;
 import transerferObjects.OrderTO;
 import transerferObjects.ProductTO;
+import transerferObjects.UserTO;
 
 public class DalFacade implements IDalFacade {
 
@@ -88,6 +90,38 @@ public class DalFacade implements IDalFacade {
 	public List<Map<String, Object>> getOrdersByStatusAndCustormerId(String status, int custId) throws SQLException {
 		// TODO Auto-generated method stub
 		return dalPO.getOrder().getOrdersByStatusAndCustormerId(status, custId);
+	}
+
+	@Override
+	public boolean addNewUser(UserTO userNewTO) throws SQLException {
+		// TODO Auto-generated method stub
+		return dalPO.getUserDAO().addNewUser(userNewTO);
+	}
+
+	@Override
+	public boolean loginUser(UserTO userOldTO) throws SQLException {
+		// TODO Auto-generated method stub
+		return dalPO.getUserDAO().loginUser(userOldTO);
+	}
+
+	@Override
+	public void storeUserActivity(ActivityTO activityTO) throws SQLException {
+		// TODO Auto-generated method stub
+		dalPO.getUserDAO().storeUserActivity(activityTO);
+		
+	}
+
+	@Override
+	public List<Map<String, Object>> getAllUsers() throws SQLException {
+		// TODO Auto-generated method stub
+		return dalPO.getUserDAO().getAllUsers();
+	}
+
+	@Override
+	public void deleteUser(int id) throws SQLException {
+		// TODO Auto-generated method stub
+		dalPO.getUserDAO().deleteUser(id);
+		
 	}
 
 }

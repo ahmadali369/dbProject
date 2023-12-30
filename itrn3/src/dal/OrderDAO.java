@@ -10,7 +10,7 @@ import transerferObjects.OrderTO;
 public class OrderDAO implements IOrderDAO{
 
 	
-	
+	DBconfig dbconnection = DBconfig.getInstance();
 	@Override
 	public void placeOrder(OrderTO orderTO) throws SQLException {
 		// TODO Auto-generated method stub
