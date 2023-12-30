@@ -30,7 +30,9 @@ public class ProductDAO implements IProductDAO {
 		// TODO Auto-generated method stub
 
 		int imgid = storeImage(productTO.getImgPathString());
-
+		int catid = getCatgoryId(productTO.getCatagory()); 
+		
+		
 		Connection connection = null;
 		try {
 			connection = dbconnection.getConnection();
@@ -44,7 +46,7 @@ public class ProductDAO implements IProductDAO {
 				preparedStatement.setString(2, productTO.getDiscription());
 				preparedStatement.setDouble(3, productTO.getPriceDouble());
 				preparedStatement.setInt(4, productTO.getQuantity());
-				preparedStatement.setString(5, productTO.getCatagory());
+				preparedStatement.setInt(5, catid);
 				preparedStatement.setDouble(6, productTO.getCost());
 				preparedStatement.setInt(7, imgid);
 
@@ -72,6 +74,29 @@ public class ProductDAO implements IProductDAO {
 			}
 		}
 
+	}
+
+	private int getCatgoryId(String cat) {
+
+		try (Connection connection = dbconnection.getConnection()) {
+
+			String query = "SELECT CategoryID FROM Category WHERE CategoryName = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, cat);
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+
+				return resultSet.getInt("CategoryID");
+
+			}
+
+			connection.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return -1;
 	}
 
 	private int storeImage(String path) {
@@ -149,12 +174,8 @@ public class ProductDAO implements IProductDAO {
 						product.put("cost", resultSet.getBigDecimal("Cost"));
 
 						product.put("imagePath", resultSet.getString("ImagePath"));
-						
-						
-						
+
 						product.put("imgBytes", getImgBytes(productId));
-						
-						
 
 						products.add(product);
 					}

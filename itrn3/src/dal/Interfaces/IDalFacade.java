@@ -1,5 +1,5 @@
 package dal.Interfaces;
 
-public interface IDalFacade extends IProductDAO{
+public interface IDalFacade extends IProductDAO, ICatagoryDAO{
 
 }

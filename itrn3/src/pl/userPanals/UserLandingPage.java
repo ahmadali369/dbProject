@@ -136,6 +136,8 @@ public class UserLandingPage extends JFrame {
 	 */
 	public UserLandingPage(IBLLFacade ibllFacade) {
 		bllFacade = ibllFacade;
+		List<Map<String, Object>> products = bllFacade.getAllProdcuts();
+		
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 987, 619);
 		contentPane = new JPanel();
@@ -203,7 +205,7 @@ public class UserLandingPage extends JFrame {
 		reloadButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				List<Map<String, Object>> products = bllFacade.getAllProdcuts();
+
 
 				if (!products.isEmpty()) {
 

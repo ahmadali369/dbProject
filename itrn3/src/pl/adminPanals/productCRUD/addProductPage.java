@@ -8,6 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.font.ImageGraphicAttribute;
 import java.io.File;
+import java.security.ProtectionDomain;
+import java.util.List;
+import java.util.Map;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,7 +27,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import bll.Interfaces.IBLLFacade;
 import pl.userPanals.ProductWidget;
+import transerferObjects.CatagoryTO;
 import transerferObjects.ProductTO;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class addProductPage extends JFrame {
 
@@ -36,7 +42,7 @@ public class addProductPage extends JFrame {
 	private JTextField costtextField;
 	private JFrame frame;
 	private IBLLFacade bllFacade;
-	private String imgPathString; 
+	private String imgPathString;
 
 	/**
 	 * Launch the application.
@@ -58,7 +64,9 @@ public class addProductPage extends JFrame {
 	 * Create the frame.
 	 */
 	public addProductPage(IBLLFacade ibllFacade) {
-		bllFacade = ibllFacade; 
+		bllFacade = ibllFacade;
+
+
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 722, 501);
 		contentPane = new JPanel();
@@ -125,7 +133,7 @@ public class addProductPage extends JFrame {
 
 				if (userSelection == JFileChooser.APPROVE_OPTION) {
 					File selectedFile = fileChooser.getSelectedFile();
-					imgPathString = selectedFile.toString(); 
+					imgPathString = selectedFile.toString();
 
 					int option = JOptionPane.showConfirmDialog(frame, "Is the chosen img is .jpg?", "img confirmation",
 							JOptionPane.YES_NO_OPTION);
@@ -178,8 +186,23 @@ public class addProductPage extends JFrame {
 		});
 		selectImgButton.setBounds(33, 310, 117, 29);
 		contentPane.add(selectImgButton);
-
+		List<Map<String, Object>> catagoriesList = bllFacade.getAllCatagoriesList();
 		JComboBox catagoryComboBox = new JComboBox();
+		if (!catagoriesList.isEmpty()) {
+
+			for (Map<String, Object> catagory : catagoriesList) {
+
+				CatagoryTO catagoryTO = new CatagoryTO();
+
+//				catagoryTO.setCatagory();
+
+				catagoryComboBox.addItem((String) catagory.get("name"));
+
+			}
+
+		}
+
+
 		catagoryComboBox.setBounds(390, 301, 91, 27);
 		contentPane.add(catagoryComboBox);
 
@@ -190,28 +213,31 @@ public class addProductPage extends JFrame {
 		JButton addProductButton = new JButton("Add Product");
 		addProductButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ProductTO productTO = new ProductTO(); 
-				
+				ProductTO productTO = new ProductTO();
+
 				productTO.setName(producttextField.getText());
 				productTO.setPriceDouble(Double.parseDouble(pricetextField.getText()));
 				productTO.setDiscription(discriptiontextPane.getText());
 				productTO.setCost(Double.parseDouble(costtextField.getText()));
-//				Double.parseDouble(pricetextField.getText())
-				
-				
+
+
 				productTO.setImgPathString(imgPathString);
 				productTO.setQuantity(Integer.parseInt(quantitytextField.getText()));
 				
+                String selectedItem = (String) catagoryComboBox.getSelectedItem();
+                
+                productTO.setCatagory(selectedItem);
+                
 				
+
 				try {
 					bllFacade.addProduct(productTO);
 //					System.out.println("pl calls");
 				} catch (Exception e2) {
 					// TODO: handle exception
-					e2.printStackTrace(); 
+					e2.printStackTrace();
 				}
 
-				
 			}
 		});
 		addProductButton.setBounds(311, 410, 117, 29);

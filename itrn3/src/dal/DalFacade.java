@@ -6,26 +6,23 @@ import java.util.Map;
 
 import ParameterObjects.DalPO;
 import dal.Interfaces.IDalFacade;
+import transerferObjects.CatagoryTO;
 import transerferObjects.ProductTO;
 
-public class DalFacade implements IDalFacade{
+public class DalFacade implements IDalFacade {
 
-	
-	DalPO dalPO; 
-	
+	DalPO dalPO;
+
 	public DalFacade(DalPO dalPO) {
-		this.dalPO = dalPO; 
-		
-		
+		this.dalPO = dalPO;
+
 	}
-	
-	
+
 	@Override
 	public void addProdcut(ProductTO productTO) throws SQLException {
 		// TODO Auto-generated method stub
 		dalPO.getProductDAO().addProdcut(productTO);
 
-		
 	}
 
 	@Override
@@ -44,13 +41,26 @@ public class DalFacade implements IDalFacade{
 	public void updateProduct(ProductTO productTO) throws SQLException {
 		// TODO Auto-generated method stub
 		dalPO.getProductDAO().updateProduct(productTO);
-		
+
 	}
 
 	@Override
 	public void deleteProduct(ProductTO productTO) throws SQLException {
 		// TODO Auto-generated method stub
 		dalPO.getProductDAO().deleteProduct(productTO);
+	}
+
+	@Override
+	public void addCatagory(CatagoryTO catagoryTO) throws SQLException  {
+		// TODO Auto-generated method stub
+		dalPO.getCatagoryDAO().addCatagory(catagoryTO);
+
+	}
+
+	@Override
+	public List<Map<String, Object>> getAllCatagoriesList()  throws SQLException {
+		// TODO Auto-generated method stub
+		return dalPO.getCatagoryDAO().getAllCatagoriesList();
 	}
 
 }

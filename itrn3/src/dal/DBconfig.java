@@ -96,13 +96,14 @@ public class DBconfig {
 /////==== cat
                 String createCategoryTableSQL = "CREATE TABLE IF NOT EXISTS Category (" +
                         "CategoryID INT AUTO_INCREMENT PRIMARY KEY," +
-                        "CategoryName VARCHAR(255) NOT NULL" +
+                        "CategoryName VARCHAR(255) NOT NULL UNIQUE" +
                         ")";
 
                 statement.executeUpdate(createCategoryTableSQL);
                 
                 String[] dummyCategories = {"Electronics", "Clothing", "Books", "Home and Garden"};
                 String insertCategorySQL = "INSERT INTO Category (CategoryName) VALUES (?)";
+//                String insertCategorySQL = "INSERT INTO Category (CategoryName) SELECT ? FROM dual WHERE NOT EXISTS (SELECT * FROM Category WHERE CategoryName = ?)";
                 try (PreparedStatement preparedStatement = connection.prepareStatement(insertCategorySQL)) {
                     for (String categoryName : dummyCategories) {
                         preparedStatement.setString(1, categoryName);
@@ -110,7 +111,9 @@ public class DBconfig {
                         int rowsAffected = preparedStatement.executeUpdate();
 
                     }
-                }
+                }catch (Exception e) {
+					// TODO: handle exception
+				}
    /// cat ====             
                 
             	

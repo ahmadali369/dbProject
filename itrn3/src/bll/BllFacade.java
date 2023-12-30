@@ -6,6 +6,7 @@ import java.util.Map;
 import ParameterObjects.BllPo;
 import bll.Interfaces.IBLLFacade;
 import dal.Interfaces.IDalFacade;
+import transerferObjects.CatagoryTO;
 import transerferObjects.ProductTO;
 
 public class BllFacade implements IBLLFacade{
@@ -55,6 +56,25 @@ public class BllFacade implements IBLLFacade{
 		// TODO Auto-generated method stub
 		bllPo.getProductBLO().deleteProduct(productTO);
 		
+	}
+
+
+
+
+	@Override
+	public void addCatagory(CatagoryTO catagoryTO) {
+		// TODO Auto-generated method stub
+		bllPo.getCatagoryBLO().addCatagory(catagoryTO);
+		
+	}
+
+
+
+
+	@Override
+	public List<Map<String, Object>> getAllCatagoriesList() {
+		// TODO Auto-generated method stub
+		return bllPo.getCatagoryBLO().getAllCatagoriesList();
 	}
 
 }
