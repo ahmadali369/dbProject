@@ -7,6 +7,7 @@ import java.util.Map;
 import ParameterObjects.DalPO;
 import dal.Interfaces.IDalFacade;
 import transerferObjects.CatagoryTO;
+import transerferObjects.OrderTO;
 import transerferObjects.ProductTO;
 
 public class DalFacade implements IDalFacade {
@@ -61,6 +62,32 @@ public class DalFacade implements IDalFacade {
 	public List<Map<String, Object>> getAllCatagoriesList()  throws SQLException {
 		// TODO Auto-generated method stub
 		return dalPO.getCatagoryDAO().getAllCatagoriesList();
+	}
+
+	@Override
+	public void placeOrder(OrderTO orderTO) throws SQLException {
+		// TODO Auto-generated method stub
+		dalPO.getOrder().placeOrder(orderTO);
+		
+	}
+
+	@Override
+	public void changeOrderStatus(int orderId, String status) throws SQLException {
+		// TODO Auto-generated method stub
+		dalPO.getOrder().changeOrderStatus(orderId, status);
+		
+	}
+
+	@Override
+	public List<Map<String, Object>> getOrdersBySatus(String status) throws SQLException {
+		// TODO Auto-generated method stub
+		return dalPO.getOrder().getOrdersBySatus(status);
+	}
+
+	@Override
+	public List<Map<String, Object>> getOrdersByStatusAndCustormerId(String status, int custId) throws SQLException {
+		// TODO Auto-generated method stub
+		return dalPO.getOrder().getOrdersByStatusAndCustormerId(status, custId);
 	}
 
 }

@@ -1,10 +1,12 @@
 package ParameterObjects;
 
-import bll.Cart;
+import bll.CartBLO;
 import bll.CatagoryBLO;
+import bll.OrderBLO;
 import bll.ProductBLO;
-import bll.Interfaces.ICart;
+import bll.Interfaces.ICartBLO;
 import bll.Interfaces.ICatagoryBLO;
+import bll.Interfaces.IOrderBLO;
 import bll.Interfaces.IProductBLO;
 import dal.DalFacade;
 import dal.Interfaces.IDalFacade;
@@ -16,14 +18,16 @@ public class BllPo {
 	
 	IProductBLO productBLO; 
 	ICatagoryBLO catagoryBLO; 
-	ICart cart; 
+	ICartBLO cart; 
+	IOrderBLO order; 
 	
 	
 	public BllPo(IDalFacade dalFacade) {
 		
 		productBLO = new ProductBLO(dalFacade);
 		catagoryBLO = new CatagoryBLO(dalFacade); 
-		cart = new Cart(); 
+		cart = new CartBLO(); 
+		order = new OrderBLO(dalFacade); 
 		
 	}
 
@@ -43,12 +47,20 @@ public class BllPo {
 		this.productBLO = productBLO;
 	}
 
-	public ICart getCart() {
+	public ICartBLO getCart() {
 		return cart;
 	}
 
-	public void setCart(ICart cart) {
+	public void setCart(ICartBLO cart) {
 		this.cart = cart;
+	}
+
+	public IOrderBLO getOrder() {
+		return order;
+	}
+
+	public void setOrder(IOrderBLO order) {
+		this.order = order;
 	}
 	
 	

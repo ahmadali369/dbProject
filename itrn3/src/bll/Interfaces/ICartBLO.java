@@ -4,7 +4,7 @@ import java.util.List;
 
 import transerferObjects.ProductTO;
 
-public interface ICart {
+public interface ICartBLO {
 
 	void addToCart(ProductTO productTO);
 	List<ProductTO> getCartProducts(); 

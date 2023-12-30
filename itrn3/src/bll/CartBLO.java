@@ -3,16 +3,16 @@ package bll;
 import java.util.ArrayList;
 import java.util.List;
 
-import bll.Interfaces.ICart;
+import bll.Interfaces.ICartBLO;
 import transerferObjects.ProductTO;
 
-public class Cart implements ICart{
+public class CartBLO implements ICartBLO{
 
 	List<ProductTO> cart;
 	
 	
 	
-	public Cart() {
+	public CartBLO() {
 	
 		cart = new ArrayList<ProductTO>(); 
 		

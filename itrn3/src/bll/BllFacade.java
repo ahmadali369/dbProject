@@ -7,6 +7,7 @@ import ParameterObjects.BllPo;
 import bll.Interfaces.IBLLFacade;
 import dal.Interfaces.IDalFacade;
 import transerferObjects.CatagoryTO;
+import transerferObjects.OrderTO;
 import transerferObjects.ProductTO;
 
 public class BllFacade implements IBLLFacade {
@@ -84,6 +85,31 @@ public class BllFacade implements IBLLFacade {
 		// TODO Auto-generated method stub
 		bllPo.getCart().removeFromCart(productTO);
 
+	}
+
+	@Override
+	public void placeOrder(OrderTO orderTO) {
+		// TODO Auto-generated method stub
+		bllPo.getOrder().placeOrder(orderTO);
+		
+	}
+
+	@Override
+	public void changeOrderStatus(int orderId, String status) {
+		// TODO Auto-generated method stub
+		bllPo.getOrder().changeOrderStatus(orderId, status);
+	}
+
+	@Override
+	public List<Map<String, Object>> getOrdersBySatus(String status) {
+		// TODO Auto-generated method stub
+		return bllPo.getOrder().getOrdersBySatus(status);
+	}
+
+	@Override
+	public List<Map<String, Object>> getOrdersByStatusAndCustormerId(String status, int custId) {
+		// TODO Auto-generated method stub
+		return bllPo.getOrder().getOrdersByStatusAndCustormerId(status, custId);
 	}
 
 }
