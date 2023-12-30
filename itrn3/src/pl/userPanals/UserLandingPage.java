@@ -137,7 +137,7 @@ public class UserLandingPage extends JFrame {
 	public UserLandingPage(IBLLFacade ibllFacade) {
 		bllFacade = ibllFacade;
 		List<Map<String, Object>> products = bllFacade.getAllProdcuts();
-		
+
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 987, 619);
 		contentPane = new JPanel();
@@ -151,10 +151,10 @@ public class UserLandingPage extends JFrame {
 		lblNewLabel.setBounds(32, 26, 101, 25);
 		contentPane.add(lblNewLabel);
 
-		JButton reloadButton = new JButton("Reload");
-
-		reloadButton.setBounds(735, 26, 117, 29);
-		contentPane.add(reloadButton);
+//		JButton reloadButton = new JButton("Reload");
+//
+//		reloadButton.setBounds(735, 26, 117, 29);
+//		contentPane.add(reloadButton);
 
 		JButton btnAddToCart = new JButton("Add to Cart");
 		btnAddToCart.addActionListener(new ActionListener() {
@@ -202,53 +202,69 @@ public class UserLandingPage extends JFrame {
 		scrollPane.setViewportView(panel);
 		panel.setLayout(new GridLayout(0, 2, 20, 20));
 
-		reloadButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
 
+		if (!products.isEmpty()) {
 
+			for (Map<String, Object> product : products) {
 
-				if (!products.isEmpty()) {
+				ProductTO productTO = new ProductTO();
 
-					for (Map<String, Object> product : products) {
+				productTO.setName((String) product.get("name"));
 
-						ProductTO productTO = new ProductTO();
-						
-						productTO.setName((String)product.get("name"));
-						
-						
-						
-						BigDecimal bigDecimalValue = new BigDecimal(product.get("price").toString());
-						Double price = bigDecimalValue.doubleValue();
-						
-						
-						productTO.setPriceDouble(price);
-						productTO.setDiscription((String)product.get("description"));
-						productTO.setImgBytes((byte[])product.get("imgBytes"));
-						
-						
-						
-//						productTO.setProductid(ABORT);
-						
-//						(String)product.get("description"); 
-//						(Double)product.get("price"); 
-						
-						
-						
-						panel.add(new ProductWidget(productTO));
-						
-						panel.revalidate(); 
-						panel.repaint(); 
+				BigDecimal bigDecimalValue = new BigDecimal(product.get("price").toString());
+				Double price = bigDecimalValue.doubleValue();
 
-					}
+				productTO.setPriceDouble(price);
+				productTO.setDiscription((String) product.get("description"));
+				productTO.setImgBytes((byte[]) product.get("imgBytes"));
 
-				} else {
-					System.out.println("no products found");
-				}
+				panel.add(new ProductWidget(productTO));
+
+				panel.revalidate();
+				panel.repaint();
 
 			}
-		});
 
-
+		} else {
+			System.out.println("no products found");
+		}
+		
+		
+		
+		
+		
+//		
+//		reloadButton.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+////
+////				if (!products.isEmpty()) {
+////
+////					for (Map<String, Object> product : products) {
+////
+////						ProductTO productTO = new ProductTO();
+////
+////						productTO.setName((String) product.get("name"));
+////
+////						BigDecimal bigDecimalValue = new BigDecimal(product.get("price").toString());
+////						Double price = bigDecimalValue.doubleValue();
+////
+////						productTO.setPriceDouble(price);
+////						productTO.setDiscription((String) product.get("description"));
+////						productTO.setImgBytes((byte[]) product.get("imgBytes"));
+////
+////						panel.add(new ProductWidget(productTO));
+////
+////						panel.revalidate();
+////						panel.repaint();
+////
+////					}
+////
+////				} else {
+////					System.out.println("no products found");
+////				}
+//
+//			}
+//		});
 
 	}
 }

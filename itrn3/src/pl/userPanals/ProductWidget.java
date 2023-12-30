@@ -81,6 +81,7 @@ public class ProductWidget extends JPanel {
 		add(productNameLable, "cell 1 0 3 1,alignx left,aligny center");
 		
 		JTextPane productDiscription = new JTextPane();
+		productDiscription.setEditable(false);
 		productDiscription.setBackground(new Color(255, 255, 255));
 		productDiscription.setFont(new Font("Lucida Grande", Font.ITALIC, 11));
 		productDiscription.setText(productTO.getDiscription());
