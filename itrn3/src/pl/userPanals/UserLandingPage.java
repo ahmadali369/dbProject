@@ -154,6 +154,7 @@ public class UserLandingPage extends JFrame {
 		JButton btnPlaceOrder = new JButton("Place Order");
 		btnPlaceOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				PlaceOrder frame = new PlaceOrder(bllFacade);
 				frame.setVisible(true);
 
@@ -206,39 +207,6 @@ public class UserLandingPage extends JFrame {
 		} else {
 			System.out.println("no products found");
 		}
-
-//		
-//		reloadButton.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-////
-////				if (!products.isEmpty()) {
-////
-////					for (Map<String, Object> product : products) {
-////
-////						ProductTO productTO = new ProductTO();
-////
-////						productTO.setName((String) product.get("name"));
-////
-////						BigDecimal bigDecimalValue = new BigDecimal(product.get("price").toString());
-////						Double price = bigDecimalValue.doubleValue();
-////
-////						productTO.setPriceDouble(price);
-////						productTO.setDiscription((String) product.get("description"));
-////						productTO.setImgBytes((byte[]) product.get("imgBytes"));
-////
-////						panel.add(new ProductWidget(productTO));
-////
-////						panel.revalidate();
-////						panel.repaint();
-////
-////					}
-////
-////				} else {
-////					System.out.println("no products found");
-////				}
-//
-//			}
-//		});
 
 	}
 }
