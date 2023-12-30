@@ -1,12 +1,11 @@
-package bll;
+package dal.Interfaces;
 
 import java.util.List;
 import java.util.Map;
 
 import transerferObjects.CatagoryTO;
-//import transerferObjects.ProductTO;
 
-public interface ICatagoryBLO {
+public interface ICatagoryDAO {
 
 	public void addCatagory(CatagoryTO catagoryTO);
 

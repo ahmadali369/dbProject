@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 
-import bll.IBLLFacade;
+import bll.Interfaces.IBLLFacade;
 import net.miginfocom.swing.MigLayout;
 import transerferObjects.ProductTO;
 

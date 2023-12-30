@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import bll.IBLLFacade;
+import bll.Interfaces.IBLLFacade;
 
 import javax.swing.JLabel;
 import java.awt.Font;

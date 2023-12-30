@@ -15,9 +15,9 @@ import javax.swing.border.EmptyBorder;
 import ParameterObjects.BllPo;
 import ParameterObjects.DalPO;
 import bll.BllFacade;
-import bll.IBLLFacade;
+import bll.Interfaces.IBLLFacade;
 import dal.DalFacade;
-import dal.IDalFacade;
+import dal.Interfaces.IDalFacade;
 import pl.login.AdminLogin;
 import pl.login.UserLogin;
 

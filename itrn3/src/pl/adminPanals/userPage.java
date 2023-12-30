@@ -12,7 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
-import bll.IBLLFacade;
+import bll.Interfaces.IBLLFacade;
 import pl.login.UserSignUp;
 
 public class userPage extends JFrame {

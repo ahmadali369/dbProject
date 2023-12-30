@@ -4,7 +4,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import dal.IDalFacade;
+import bll.Interfaces.IProductBLO;
+import dal.Interfaces.IDalFacade;
 import transerferObjects.ProductTO;
 
 public class ProductBLO implements IProductBLO{

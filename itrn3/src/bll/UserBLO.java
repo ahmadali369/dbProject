@@ -1,5 +1,6 @@
 package bll;
 
+import bll.Interfaces.IUserBLO;
 import transerferObjects.UserNewTO;
 import transerferObjects.UserOldTO;
 

@@ -1,9 +1,9 @@
 package ParameterObjects;
 
-import bll.IProductBLO;
 import bll.ProductBLO;
+import bll.Interfaces.IProductBLO;
 import dal.DalFacade;
-import dal.IDalFacade;
+import dal.Interfaces.IDalFacade;
 
 public class BllPo {
 

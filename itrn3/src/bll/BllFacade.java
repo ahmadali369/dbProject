@@ -4,7 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import ParameterObjects.BllPo;
-import dal.IDalFacade;
+import bll.Interfaces.IBLLFacade;
+import dal.Interfaces.IDalFacade;
 import transerferObjects.ProductTO;
 
 public class BllFacade implements IBLLFacade{

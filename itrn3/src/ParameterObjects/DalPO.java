@@ -1,7 +1,7 @@
 package ParameterObjects;
 
-import dal.IProductDAO;
 import dal.ProductDAO;
+import dal.Interfaces.IProductDAO;
 
 public class DalPO {
 

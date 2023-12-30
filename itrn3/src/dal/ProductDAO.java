@@ -15,6 +15,7 @@ import java.util.Map;
 
 import javax.swing.ImageIcon;
 
+import dal.Interfaces.IProductDAO;
 //import dal.classes.DBconfig;
 import transerferObjects.ProductTO;
 

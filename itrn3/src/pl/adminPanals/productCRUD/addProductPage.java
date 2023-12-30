@@ -22,7 +22,7 @@ import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import bll.IBLLFacade;
+import bll.Interfaces.IBLLFacade;
 import pl.userPanals.ProductWidget;
 import transerferObjects.ProductTO;
 

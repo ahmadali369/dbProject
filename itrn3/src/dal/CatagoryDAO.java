@@ -3,6 +3,7 @@ package dal;
 import java.util.List;
 import java.util.Map;
 
+import dal.Interfaces.ICatagoryDAO;
 import transerferObjects.CatagoryTO;
 
 public class CatagoryDAO implements ICatagoryDAO{

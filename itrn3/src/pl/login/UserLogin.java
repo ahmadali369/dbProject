@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import bll.IBLLFacade;
+import bll.Interfaces.IBLLFacade;
 import pl.userPanals.UserLandingPage;
 
 import javax.swing.JTextField;

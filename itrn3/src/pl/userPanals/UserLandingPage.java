@@ -106,7 +106,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
-import bll.IBLLFacade;
+import bll.Interfaces.IBLLFacade;
 import transerferObjects.ProductTO;
 
 public class UserLandingPage extends JFrame {

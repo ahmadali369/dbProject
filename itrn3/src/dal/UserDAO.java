@@ -2,6 +2,7 @@ package dal;
 
 import java.sql.SQLException;
 
+import dal.Interfaces.IUserDAO;
 import transerferObjects.UserNewTO;
 import transerferObjects.UserOldTO;
 

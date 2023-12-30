@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import ParameterObjects.DalPO;
+import dal.Interfaces.IDalFacade;
 import transerferObjects.ProductTO;
 
 public class DalFacade implements IDalFacade{
