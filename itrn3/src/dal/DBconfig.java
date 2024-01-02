@@ -166,6 +166,15 @@ public class DBconfig {
                     ")";
             statement.executeUpdate(createOrderDetailTableSQL);
             
+            String createUserActivityLogTableSQL = "CREATE TABLE IF NOT EXISTS UserActivityLog (" +
+                    "LogID INT AUTO_INCREMENT PRIMARY KEY," +
+                    "UserID INT," +
+                    "ActivityType VARCHAR(50) NOT NULL," +
+                    "Timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP," +
+                    "FOREIGN KEY (UserID) REFERENCES User(UserID)" +
+                    ")";
+            statement.executeUpdate(createUserActivityLogTableSQL);
+            
 		
 
 		} catch (SQLException e) {
