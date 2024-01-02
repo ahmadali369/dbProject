@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import bll.CartBLO;
 import bll.Interfaces.IBLLFacade;
 import pl.adminPanals.productCRUD.addProductPage;
 import pl.adminPanals.productCRUD.editProductPage;
@@ -81,8 +82,21 @@ public class manageProductPage extends JFrame {
 		editProductButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				editProductPage frame = new editProductPage(new ProductTO(), bllFacade);
-				frame.setVisible(true);
+				List<ProductTO> cart = bllFacade.getCartProducts();
+				
+				if(cart.size() != 1) {
+					System.out.println("------ Select one product");
+					
+				}else {
+					
+					editProductPage frame = new editProductPage(new ProductTO(), bllFacade);
+					frame.setVisible(true);
+					
+				}
+				
+				
+				
+
 			}
 		});
 		editProductButton.setBounds(456, 28, 117, 29);
@@ -115,10 +129,19 @@ public class manageProductPage extends JFrame {
 
 				BigDecimal bigDecimalValue = new BigDecimal(product.get("price").toString());
 				Double price = bigDecimalValue.doubleValue();
-
 				productTO.setPriceDouble(price);
+				
 				productTO.setDiscription((String) product.get("description"));
 				productTO.setImgBytes((byte[]) product.get("imgBytes"));
+				productTO.setQuantity((int)product.get("quantity"));
+
+
+				
+				
+				BigDecimal bigDecimalValue2 = new BigDecimal(product.get("cost").toString());
+				Double cost = bigDecimalValue2.doubleValue();
+				productTO.setCost(cost);
+
 
 				panel.add(new ProductWidget(productTO, bllFacade, false));
 
