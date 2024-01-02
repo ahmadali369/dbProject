@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 import bll.Interfaces.IBLLFacade;
 import pl.userPanals.UserLandingPage;
+import transerferObjects.UserTO;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -75,6 +76,14 @@ public class UserLogin extends JFrame {
 		userLoginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				
+				UserTO userTO = new UserTO(); 
+				userTO.setEmail(userNametextField.getText());
+				userTO.setPassword(userPasswordtextField.getText());
+				
+				bllFacade.loginUser(userTO); 
+				
+				
 				UserLandingPage frame = new UserLandingPage(bllFacade);
 				frame.setVisible(true);
 			}
@@ -85,6 +94,8 @@ public class UserLogin extends JFrame {
 		JButton userSignupButton = new JButton("SignUp");
 		userSignupButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				
 				
 				UserSignUp frame = new UserSignUp(bllFacade);
 				frame.setVisible(true);

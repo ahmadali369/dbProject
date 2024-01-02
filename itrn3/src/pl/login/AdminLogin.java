@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 import bll.Interfaces.IBLLFacade;
 import pl.adminPanals.AdminLandingPage;
+import transerferObjects.UserTO;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -79,6 +80,15 @@ public class AdminLogin extends JFrame {
 		JButton btnNewButton = new JButton("Login");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+
+				
+				UserTO userTO = new UserTO(); 
+				userTO.setUserType(userNametextField.getText());
+				userTO.setPassword(passwordtextField.getText());
+				
+				bllFacade.loginUser(userTO); 
+				
 				
 				AdminLandingPage frame = new AdminLandingPage(bllFacade);
 				frame.setVisible(true);

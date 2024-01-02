@@ -133,79 +133,40 @@ public class DBconfig {
 
             statement.executeUpdate(createProductTableSQL);
             
+            String createUserTableSQL = "CREATE TABLE IF NOT EXISTS User (" +
+                    "UserID INT AUTO_INCREMENT PRIMARY KEY," +
+                    "FirstName VARCHAR(255) NOT NULL," +
+                    "LastName VARCHAR(255) NOT NULL," +
+                    "EmailAddress VARCHAR(255) NOT NULL UNIQUE," +
+                    "Password VARCHAR(255) NOT NULL," +
+                    "HomeAddress VARCHAR(255)" +
+                    ")";
+            
+            statement.executeUpdate(createUserTableSQL);
             
             
+            String createOrderTableSQL = "CREATE TABLE IF NOT EXISTS `Order` (" +
+                    "OrderID INT AUTO_INCREMENT PRIMARY KEY," +
+                    "UserID INT," +
+                    "OrderDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP," +
+                    "Status VARCHAR(50) NOT NULL," +
+                    "FOREIGN KEY (UserID) REFERENCES User(UserID)" +
+                    ")";
+            statement.executeUpdate(createOrderTableSQL);
 
-            
-            
-//
-//				String createPoemsTableSQL = "CREATE TABLE IF NOT EXISTS poems (" +
-//					    "id INT AUTO_INCREMENT PRIMARY KEY," +
-//					    "title VARCHAR(255) UNIQUE," + 
-//					    
-//					    "total_verses INT NOT NULL," +
-//					    "book_id INT," +
-//					    "FOREIGN KEY (book_id) REFERENCES books (book_id) ON DELETE CASCADE ON UPDATE CASCADE" +
-//					    ")";
-//
-//				statement.executeUpdate(createPoemsTableSQL);
-//
-//				String createVersesTableSQL = "CREATE TABLE IF NOT EXISTS verses (" +
-//				    "verse_id INT AUTO_INCREMENT PRIMARY KEY," +
-//				    "misra1 TEXT," +
-//				    "misra2 TEXT," +
-//				    "verse_number INT," +
-//				    "poem_id INT," +
-//				    "FOREIGN KEY (poem_id) REFERENCES poems (id) ON DELETE CASCADE ON UPDATE CASCADE" +
-//				    ")";
-//				statement.executeUpdate(createVersesTableSQL);
-//				
-//							
-//				String createTokenTableSQL = "CREATE TABLE IF NOT EXISTS tokens (" +
-//					    "token_id INT AUTO_INCREMENT PRIMARY KEY," +
-//					    "token TEXT," +
-//					    "verse_id INT," +
-//					    "pos TEXT," +
-//					    "FOREIGN KEY (verse_id) REFERENCES verses (verse_id) ON DELETE CASCADE ON UPDATE CASCADE" +
-//
-//					    ")";
-//					statement.executeUpdate(createTokenTableSQL);
-//					
-//					
-//					
-//					String createRootTableSQL = "CREATE TABLE IF NOT EXISTS root (" +
-//						    "id INT AUTO_INCREMENT PRIMARY KEY," +                          
-//						    "verse_id INT," +                          
-//						    "root VARCHAR(500) UNIQUE," +                     
-//						    "status VARCHAR(500)," +    
-//						    "FOREIGN KEY (verse_id) REFERENCES verses (verse_id) ON DELETE CASCADE ON UPDATE CASCADE" +
-//						    ")";
-//
-//						statement.executeUpdate(createRootTableSQL);
-//					
-//					
-//					
-//					String createVerseTokenJunctionTableSQL = "CREATE TABLE IF NOT EXISTS verse_token_junction (" +
-//					        "verse_id INT," +
-//					        "token_id INT," +
-//					        "PRIMARY KEY (verse_id, token_id)," +
-//					        "FOREIGN KEY (verse_id) REFERENCES verses (verse_id) ON DELETE CASCADE ON UPDATE CASCADE," +
-//					        "FOREIGN KEY (token_id) REFERENCES tokens (token_id) ON DELETE CASCADE ON UPDATE CASCADE" +
-//					        ")";
-//					statement.executeUpdate(createVerseTokenJunctionTableSQL);
-//		
-//					
-//					
-//					String createVerseRootJunctionTableSQL = "CREATE TABLE IF NOT EXISTS verse_root_junction (" +
-//					        "verse_id INT," +
-//					        "root_id INT," +
-//					        "PRIMARY KEY (verse_id, root_id)," +
-//					        "FOREIGN KEY (verse_id) REFERENCES verses (verse_id) ON DELETE CASCADE ON UPDATE CASCADE," +
-//					        "FOREIGN KEY (root_id) REFERENCES root (id) ON DELETE CASCADE ON UPDATE CASCADE" +
-//					        ")";
-//					statement.executeUpdate(createVerseRootJunctionTableSQL);
 
-			
+
+            String createOrderDetailTableSQL = "CREATE TABLE IF NOT EXISTS OrderDetail (" +
+                    "OrderDetailID INT AUTO_INCREMENT PRIMARY KEY," +
+                    "OrderID INT," +
+                    "ProductID INT," +
+                    "Quantity INT NOT NULL," +
+                    "FOREIGN KEY (OrderID) REFERENCES `Order`(OrderID)," +
+                    "FOREIGN KEY (ProductID) REFERENCES Product(ProductID)" +
+                    ")";
+            statement.executeUpdate(createOrderDetailTableSQL);
+            
+		
 
 		} catch (SQLException e) {
 //			logger.debug("createDatabaseAndTableIfNotExists func triggerd an exception");

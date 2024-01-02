@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 import bll.Interfaces.IBLLFacade;
 import pl.userPanals.UserLandingPage;
+import transerferObjects.UserTO;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -120,6 +121,20 @@ public class UserSignUp extends JFrame {
 		JButton adminSignupButton = new JButton("SignUp");
 		adminSignupButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+
+				
+				
+				UserTO userTO = new UserTO(); 
+				userTO.setFname(firstNametextField.getText());
+				userTO.setLname(lastNametextField.getText());
+				userTO.setPassword(passwordtextField.getText());
+				userTO.setAddress(addresstextField.getText());
+				userTO.setEmail(emailtextField.getText());
+				
+				bllFacade.addNewUser(userTO); 
+				
+				
 				UserLandingPage frame = new UserLandingPage(bllFacade);
 				frame.setVisible(true);
 			}
