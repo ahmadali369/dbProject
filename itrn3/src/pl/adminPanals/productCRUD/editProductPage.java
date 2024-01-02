@@ -118,6 +118,35 @@ public class editProductPage extends JFrame {
 		panel.setBackground(Color.WHITE);
 		panel.setBounds(33, 75, 225, 211);
 		contentPane.add(panel);
+		
+		try {
+
+			ImageIcon originalIcon = new ImageIcon(cart.get(0).getImgBytes());
+
+			Image originalImage = originalIcon.getImage();
+
+			int newWidth = 250; // Set your desired width
+			int newHeight = 250; // Set your desired height
+			Image resizedImage = originalImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+
+			ImageIcon resizedIcon = new ImageIcon(resizedImage);
+
+			JLabel label = new JLabel(resizedIcon);
+
+			panel.add(label);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			System.out.println("img not loaded");
+//			e.printStackTrace();
+		}
+		
+		
+		
+		
+		
+		
 
 		JButton changeImgButton = new JButton("Change Image");
 		changeImgButton.addActionListener(new ActionListener() {
@@ -159,6 +188,7 @@ public class editProductPage extends JFrame {
 
 								JLabel label = new JLabel(resizedIcon);
 
+								panel.removeAll();
 								panel.add(label);
 								panel.revalidate();
 								panel.repaint();

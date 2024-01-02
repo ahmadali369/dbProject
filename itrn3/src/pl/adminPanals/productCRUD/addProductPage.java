@@ -160,6 +160,7 @@ public class addProductPage extends JFrame {
 
 								JLabel label = new JLabel(resizedIcon);
 
+								panel.removeAll();
 								panel.add(label);
 								panel.revalidate();
 								panel.repaint();
