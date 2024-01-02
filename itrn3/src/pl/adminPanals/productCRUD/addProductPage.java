@@ -216,6 +216,8 @@ public class addProductPage extends JFrame {
 		JButton addProductButton = new JButton("Add Product");
 		addProductButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				
 				ProductTO productTO = new ProductTO();
 
 				productTO.setName(producttextField.getText());

@@ -36,6 +36,7 @@ public class editProductPage extends JFrame {
 	private JFrame frame;
 	private IBLLFacade bllFacade;
 	private String imgPathString;
+	private JTextField costTextfiled;
 
 	/**
 	 * Launch the application.
@@ -235,6 +236,17 @@ public class editProductPage extends JFrame {
 		
 		catagoryComboBox.setBounds(390, 311, 91, 27);
 		contentPane.add(catagoryComboBox);
+		
+		
+		costTextfiled = new JTextField();
+		costTextfiled.setText((String) null);
+		costTextfiled.setColumns(10);
+		costTextfiled.setBounds(390, 358, 70, 26);
+		costTextfiled.setText(cart.get(0).getCost().toString());
+		
+		contentPane.add(costTextfiled);
+		
+		
 
 		JLabel lblNewLabel_1_2_1 = new JLabel("Catagory");
 		lblNewLabel_1_2_1.setBounds(300, 315, 61, 16);
@@ -243,6 +255,35 @@ public class editProductPage extends JFrame {
 		JButton editProductButton = new JButton("Edit Product");
 		editProductButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				
+				ProductTO productTO = new ProductTO();
+
+				productTO.setName(producttextField.getText());
+				productTO.setPriceDouble(Double.parseDouble(pricetextField.getText()));
+				productTO.setDiscription(discriptiontextPane.getText());
+				productTO.setCost(Double.parseDouble(costTextfiled.getText()));
+
+
+				productTO.setImgPathString(imgPathString);
+				productTO.setQuantity(Integer.parseInt(quantitytextField.getText()));
+				
+                String selectedItem = (String) catagoryComboBox.getSelectedItem();
+                
+                productTO.setCatagory(selectedItem);
+                
+				
+
+				try {
+					bllFacade.updateProdcut(productTO);
+//					System.out.println("pl calls");
+				} catch (Exception e2) {
+					// TODO: handle exception
+					e2.printStackTrace();
+				}
+				
+				
+				
 			}
 		});
 		editProductButton.setBounds(311, 410, 117, 29);
@@ -260,6 +301,12 @@ public class editProductPage extends JFrame {
 		});
 		addNewCatagoryButton.setBounds(493, 310, 147, 29);
 		contentPane.add(addNewCatagoryButton);
+		
+
+		
+		JLabel lblNewLabel_1_2_2 = new JLabel("Price");
+		lblNewLabel_1_2_2.setBounds(300, 363, 61, 16);
+		contentPane.add(lblNewLabel_1_2_2);
 	}
 
 }

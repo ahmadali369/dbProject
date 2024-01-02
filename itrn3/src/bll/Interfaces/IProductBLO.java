@@ -10,6 +10,7 @@ public interface IProductBLO {
 	public void addProduct(ProductTO productTO);
 
 	public List<Map<String, Object>> getAllProdcuts();
+
 	public List<Map<String, Object>> getAllProdcutsByCatagory();
 
 	public void updateProdcut(ProductTO productTO);

@@ -212,6 +212,9 @@ public class ProductDAO implements IProductDAO {
 	@Override
 	public void updateProduct(ProductTO productTO) throws SQLException {
 		// TODO Auto-generated method stub
+		System.out.println( "_________" +productTO.getName());
+		
+		
 
 	}
 
