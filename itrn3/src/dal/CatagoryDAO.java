@@ -25,7 +25,7 @@ public class CatagoryDAO implements ICatagoryDAO{
 			connection = dbconnection.getConnection();
 			connection.setAutoCommit(false);
 
-			String insertProductSQL = "INSERT INTO Product (CategoryName) VALUES (?)";
+			String insertProductSQL = "INSERT INTO Category (CategoryName) VALUES (?)";
 
 			try (PreparedStatement preparedStatement = connection.prepareStatement(insertProductSQL,
 					Statement.RETURN_GENERATED_KEYS)) {

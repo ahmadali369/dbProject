@@ -246,6 +246,9 @@ public class addProductPage extends JFrame {
 		JButton addCatagoryButton = new JButton("Add New Catagory");
 		addCatagoryButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				addNewCatagory frame = new addNewCatagory(bllFacade);
+				frame.setVisible(true);
 			}
 		});
 		addCatagoryButton.setBounds(503, 300, 148, 29);

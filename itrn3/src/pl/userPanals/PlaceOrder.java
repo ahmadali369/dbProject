@@ -107,10 +107,6 @@ public class PlaceOrder extends JFrame {
 		lblNewLabel_2_2.setBounds(443, 163, 99, 16);
 		contentPane.add(lblNewLabel_2_2);
 
-		JLabel lblNewLabel_2_2_1 = new JLabel("Delivery Charges:");
-		lblNewLabel_2_2_1.setBounds(443, 191, 115, 16);
-		contentPane.add(lblNewLabel_2_2_1);
-
 		JLabel lblNewLabel_3 = new JLabel("Total Bill: ");
 		lblNewLabel_3.setBounds(443, 411, 71, 16);
 		contentPane.add(lblNewLabel_3);
@@ -143,10 +139,6 @@ public class PlaceOrder extends JFrame {
 		orderAmountLable.setBounds(545, 163, 61, 16);
 		contentPane.add(orderAmountLable);
 
-		JLabel deliveryChargesLable = new JLabel("10");
-		deliveryChargesLable.setBounds(555, 191, 61, 16);
-		contentPane.add(deliveryChargesLable);
-
 		JLabel totalBillLable = new JLabel("10");
 		totalBillLable.setBounds(507, 411, 61, 16);
 		contentPane.add(totalBillLable);
@@ -157,7 +149,7 @@ public class PlaceOrder extends JFrame {
 			
 		}
 		orderAmountLable.setText(""+orderAmount);
-		
+		totalBillLable.setText(""+orderAmount);	
 		
 		
 	}
