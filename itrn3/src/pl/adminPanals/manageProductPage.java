@@ -9,21 +9,25 @@ import javax.swing.border.EmptyBorder;
 import bll.Interfaces.IBLLFacade;
 import pl.adminPanals.productCRUD.addProductPage;
 import pl.adminPanals.productCRUD.editProductPage;
+import pl.userPanals.ProductWidget;
 import transerferObjects.ProductTO;
 
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import java.awt.GridLayout;
 
 public class manageProductPage extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTable table;
 	private IBLLFacade bllFacade;
 
 	/**
@@ -47,6 +51,8 @@ public class manageProductPage extends JFrame {
 	 */
 	public manageProductPage(IBLLFacade bIbllFacade) {
 		bllFacade = bIbllFacade; 
+		
+		List<Map<String, Object>> products = bllFacade.getAllProdcuts();
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 726, 544);
 		contentPane = new JPanel();
@@ -94,11 +100,35 @@ public class manageProductPage extends JFrame {
 		scrollPane.setBounds(31, 66, 671, 439);
 		contentPane.add(scrollPane);
 		
-		table = new JTable();
-		scrollPane.setViewportView(table);
+		JPanel panel = new JPanel();
+		scrollPane.setViewportView(panel);
+		panel.setLayout(new GridLayout(0, 2, 20, 20));
 		
-		JButton reLoadButton = new JButton("Reload");
-		reLoadButton.setBounds(209, 28, 117, 29);
-		contentPane.add(reLoadButton);
+		
+		if (!products.isEmpty()) {
+
+			for (Map<String, Object> product : products) {
+
+				ProductTO productTO = new ProductTO();
+
+				productTO.setName((String) product.get("name"));
+
+				BigDecimal bigDecimalValue = new BigDecimal(product.get("price").toString());
+				Double price = bigDecimalValue.doubleValue();
+
+				productTO.setPriceDouble(price);
+				productTO.setDiscription((String) product.get("description"));
+				productTO.setImgBytes((byte[]) product.get("imgBytes"));
+
+				panel.add(new ProductWidget(productTO, bllFacade, false));
+
+				panel.revalidate();
+				panel.repaint();
+
+			}
+
+		} else {
+			System.out.println("no products found");
+		}
 	}
 }
