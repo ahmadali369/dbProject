@@ -186,6 +186,8 @@ public class addProductPage extends JFrame {
 		});
 		selectImgButton.setBounds(33, 310, 117, 29);
 		contentPane.add(selectImgButton);
+		
+		
 		List<Map<String, Object>> catagoriesList = bllFacade.getAllCatagoriesList();
 		JComboBox catagoryComboBox = new JComboBox();
 		if (!catagoriesList.isEmpty()) {

@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -22,6 +23,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import bll.Interfaces.IBLLFacade;
+import transerferObjects.CatagoryTO;
 import transerferObjects.ProductTO;
 
 public class editProductPage extends JFrame {
@@ -185,7 +187,22 @@ public class editProductPage extends JFrame {
 		changeImgButton.setBounds(33, 310, 117, 29);
 		contentPane.add(changeImgButton);
 
+		List<Map<String, Object>> catagoriesList = bllFacade.getAllCatagoriesList();
 		JComboBox catagoryComboBox = new JComboBox();
+		if (!catagoriesList.isEmpty()) {
+
+			for (Map<String, Object> catagory : catagoriesList) {
+
+				CatagoryTO catagoryTO = new CatagoryTO();
+
+
+				catagoryComboBox.addItem((String) catagory.get("name"));
+
+			}
+
+		}
+		
+		
 		catagoryComboBox.setBounds(390, 311, 91, 27);
 		contentPane.add(catagoryComboBox);
 
@@ -202,6 +219,15 @@ public class editProductPage extends JFrame {
 		contentPane.add(editProductButton);
 
 		JButton addNewCatagoryButton = new JButton("Add New Catagory");
+		addNewCatagoryButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				addNewCatagory frame = new addNewCatagory(bllFacade);
+				frame.setVisible(true);
+				
+			}
+		});
 		addNewCatagoryButton.setBounds(493, 310, 147, 29);
 		contentPane.add(addNewCatagoryButton);
 	}
