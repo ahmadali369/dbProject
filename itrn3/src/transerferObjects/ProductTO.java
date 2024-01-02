@@ -13,6 +13,8 @@ public class ProductTO {
 
 	int imgKey;
 	byte[] imgBytes;
+	
+	
 
 	public byte[] getImgBytes() {
 		return imgBytes;
@@ -93,5 +95,33 @@ public class ProductTO {
 	public void setCatagory(String catagory) {
 		this.catagory = catagory;
 	}
+	
+    public void printProductDetails() {
+        System.out.println("Product ID: " + this.productid);
+        System.out.println("Name: " + this.name);
+        System.out.println("Description: " + this.discription);
+        System.out.println("Price: " + this.priceDouble);
+        System.out.println("Category: " + this.catagory);
+        System.out.println("Cost: " + this.cost);
+        System.out.println("Quantity: " + this.quantity);
+        System.out.println("Image Path: " + this.imgPathString);
+        System.out.println("Image Key: " + this.imgKey);
+        // Additional logic for printing image bytes if needed
+    }
+	
+    public void setValuesFromProduct(ProductTO otherProduct) {
+        if (otherProduct != null) {
+            this.productid = otherProduct.getProductid();
+            this.name = otherProduct.getName();
+            this.discription = otherProduct.getDiscription();
+            this.priceDouble = otherProduct.getPriceDouble();
+            this.catagory = otherProduct.getCatagory();
+            this.cost = otherProduct.getCost();
+            this.quantity = otherProduct.getQuantity();
+            this.imgPathString = otherProduct.getImgPathString();
+            this.imgKey = otherProduct.getImgKey();
+            this.imgBytes = otherProduct.getImgBytes();
+        }
+    }
 
 }

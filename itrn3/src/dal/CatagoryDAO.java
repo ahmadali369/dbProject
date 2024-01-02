@@ -91,5 +91,31 @@ public class CatagoryDAO implements ICatagoryDAO{
 		
 		return catagories;
 	}
+	
+	
+	
+	public String getCategoryNameById(int categoryId) {
+        String categoryName = null;
+
+        try (Connection connection = dbconnection.getConnection()) {
+            String query = "SELECT CategoryName FROM Category WHERE CategoryID = ?";
+            
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setInt(1, categoryId);
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        categoryName = resultSet.getString("CategoryName");
+                    }
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return categoryName;
+    }
+	
 
 }

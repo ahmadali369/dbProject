@@ -57,7 +57,7 @@ public class editProductPage extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public editProductPage(ProductTO productTO, IBLLFacade bIbllFacade) {
+	public editProductPage(IBLLFacade bIbllFacade) {
 		bllFacade = bIbllFacade;
 		List<ProductTO> cart = bllFacade.getCartProducts();
 		
@@ -142,81 +142,6 @@ public class editProductPage extends JFrame {
 			System.out.println("img not loaded");
 //			e.printStackTrace();
 		}
-		
-		
-		
-		
-		
-		
-
-		JButton changeImgButton = new JButton("Change Image");
-		changeImgButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				JFileChooser fileChooser = new JFileChooser();
-				fileChooser.setDialogTitle("Choose a .jpg img");
-
-				fileChooser.setFileFilter(new FileNameExtensionFilter("ing files (*.jpg)", "jpg"));
-
-				int userSelection = fileChooser.showOpenDialog(frame);
-
-				if (userSelection == JFileChooser.APPROVE_OPTION) {
-					File selectedFile = fileChooser.getSelectedFile();
-					imgPathString = selectedFile.toString();
-
-					int option = JOptionPane.showConfirmDialog(frame, "Is the chosen img is .jpg?", "img confirmation",
-							JOptionPane.YES_NO_OPTION);
-
-					if (option == JOptionPane.YES_OPTION) {
-
-//						facadeBLL.importPoem(idBook, selectedFile);
-
-						System.out.println("---- " + selectedFile);
-
-						try {
-
-							if (selectedFile != null) {
-//					            ImageIcon originalIcon = new ImageIcon(ProductWidget.class.getResource(selectedFile.toString()));
-								ImageIcon originalIcon = new ImageIcon(selectedFile.toString());
-								Image originalImage = originalIcon.getImage();
-
-								int newWidth = 250; // Set your desired width
-								int newHeight = 250; // Set your desired height
-								Image resizedImage = originalImage.getScaledInstance(newWidth, newHeight,
-										Image.SCALE_SMOOTH);
-
-								ImageIcon resizedIcon = new ImageIcon(resizedImage);
-
-								JLabel label = new JLabel(resizedIcon);
-
-								panel.removeAll();
-								panel.add(label);
-								panel.revalidate();
-								panel.repaint();
-
-							}
-
-						} catch (Exception e1) {
-							// TODO: handle exception
-							System.out.println("img not loaded");
-							e1.printStackTrace();
-						}
-
-						JOptionPane.showMessageDialog(frame, "img Imported successfully.", "Success",
-								JOptionPane.INFORMATION_MESSAGE);
-
-					} else {
-						JOptionPane.showMessageDialog(frame, "Warning: only .jpg imgs supported for now.", "Warning",
-								JOptionPane.WARNING_MESSAGE);
-					}
-
-				}
-
-			}
-
-		});
-		changeImgButton.setBounds(33, 310, 117, 29);
-		contentPane.add(changeImgButton);
 
 		List<Map<String, Object>> catagoriesList = bllFacade.getAllCatagoriesList();
 		JComboBox catagoryComboBox = new JComboBox();
@@ -257,26 +182,36 @@ public class editProductPage extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				
-				ProductTO productTO = new ProductTO();
+				ProductTO productTO1 = new ProductTO();
+				
+				productTO1.setValuesFromProduct(cart.get(0));
+				
 
-				productTO.setName(producttextField.getText());
-				productTO.setPriceDouble(Double.parseDouble(pricetextField.getText()));
-				productTO.setDiscription(discriptiontextPane.getText());
-				productTO.setCost(Double.parseDouble(costTextfiled.getText()));
+				productTO1.setName(producttextField.getText());
+				productTO1.setPriceDouble(Double.parseDouble(pricetextField.getText()));
+				productTO1.setDiscription(discriptiontextPane.getText());
+				productTO1.setCost(Double.parseDouble(costTextfiled.getText()));
 
 
-				productTO.setImgPathString(imgPathString);
-				productTO.setQuantity(Integer.parseInt(quantitytextField.getText()));
+				if(imgPathString == null) {
+					
+					productTO1.setImgPathString(cart.get(0).getImgPathString());
+				}else {
+					productTO1.setImgPathString(imgPathString);
+				}
+			
+				productTO1.setQuantity(Integer.parseInt(quantitytextField.getText()));
 				
                 String selectedItem = (String) catagoryComboBox.getSelectedItem();
                 
-                productTO.setCatagory(selectedItem);
+                productTO1.setCatagory(selectedItem);
                 
 				
 
 				try {
-					bllFacade.updateProdcut(productTO);
-//					System.out.println("pl calls");
+					bllFacade.updateProdcut(productTO1);
+//					
+//					cart.get(0).printProductDetails(); 
 				} catch (Exception e2) {
 					// TODO: handle exception
 					e2.printStackTrace();
@@ -304,7 +239,7 @@ public class editProductPage extends JFrame {
 		
 
 		
-		JLabel lblNewLabel_1_2_2 = new JLabel("Price");
+		JLabel lblNewLabel_1_2_2 = new JLabel("Cost");
 		lblNewLabel_1_2_2.setBounds(300, 363, 61, 16);
 		contentPane.add(lblNewLabel_1_2_2);
 	}

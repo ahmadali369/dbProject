@@ -30,9 +30,8 @@ public class ProductDAO implements IProductDAO {
 		// TODO Auto-generated method stub
 
 		int imgid = storeImage(productTO.getImgPathString());
-		int catid = getCatgoryId(productTO.getCatagory()); 
-		
-		
+		int catid = getCatgoryId(productTO.getCatagory());
+
 		Connection connection = null;
 		try {
 			connection = dbconnection.getConnection();
@@ -211,10 +210,49 @@ public class ProductDAO implements IProductDAO {
 
 	@Override
 	public void updateProduct(ProductTO productTO) throws SQLException {
-		// TODO Auto-generated method stub
-		System.out.println( "_________" +productTO.getName());
+
 		
+//		int imgid = storeImage(productTO.getImgPathString());
+		int catid = getCatgoryId(productTO.getCatagory());
 		
+		productTO.printProductDetails();
+
+		Connection connection = null;
+
+		try {
+			connection = dbconnection.getConnection();
+			connection.setAutoCommit(false);
+
+			String updateProductSQL = "UPDATE Product SET Name=?, Description=?, Price=?, Quantity=?, CategoryID=?, Cost=? WHERE ProductID=?";
+
+			try (PreparedStatement preparedStatement = connection.prepareStatement(updateProductSQL)) {
+				preparedStatement.setString(1, productTO.getName());
+				preparedStatement.setString(2, productTO.getDiscription());
+				preparedStatement.setDouble(3, productTO.getPriceDouble());
+				preparedStatement.setInt(4, productTO.getQuantity());
+				preparedStatement.setInt(5, catid);
+				preparedStatement.setDouble(6, productTO.getCost());
+
+				preparedStatement.setInt(7, productTO.getProductid());
+
+				preparedStatement.executeUpdate();
+				connection.commit();
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+			if (connection != null) {
+				connection.rollback();
+			}
+
+			throw e;
+		} finally {
+			if (connection != null) {
+				connection.close();
+			}
+		}
 
 	}
 
