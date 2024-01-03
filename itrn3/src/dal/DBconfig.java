@@ -145,7 +145,7 @@ public class DBconfig {
             statement.executeUpdate(createUserTableSQL);
             
             
-            String createOrderTableSQL = "CREATE TABLE IF NOT EXISTS `Order` (" +
+            String createOrderTableSQL = "CREATE TABLE IF NOT EXISTS Orderr (" +
                     "OrderID INT AUTO_INCREMENT PRIMARY KEY," +
                     "UserID INT," +
                     "OrderDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP," +
@@ -162,7 +162,7 @@ public class DBconfig {
                     "OrderID INT," +
                     "ProductID INT," +
                     "Quantity INT NOT NULL," +
-                    "FOREIGN KEY (OrderID) REFERENCES `Order`(OrderID)," +
+                    "FOREIGN KEY (OrderID) REFERENCES Orderr(OrderID)," +
                     "FOREIGN KEY (ProductID) REFERENCES Product(ProductID)" +
                     ")";
             statement.executeUpdate(createOrderDetailTableSQL);

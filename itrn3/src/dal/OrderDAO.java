@@ -24,7 +24,7 @@ public class OrderDAO implements IOrderDAO{
 	public void placeOrder(OrderTO orderTO) throws SQLException {
 		long orderId = -1; 
 	    try (Connection connection = dbconnection.getConnection()) {
-	        String insertOrderSQL = "INSERT INTO `Order` (UserID, Status, shipAddress) VALUES (?, ?, ?)";
+	        String insertOrderSQL = "INSERT INTO Orderr (UserID, Status, shipAddress) VALUES (?, ?, ?)";
 
 	        try (PreparedStatement preparedStatement = connection.prepareStatement(insertOrderSQL, Statement.RETURN_GENERATED_KEYS)) {
 	            preparedStatement.setInt(1, orderTO.getCustomerID());
@@ -110,11 +110,21 @@ public class OrderDAO implements IOrderDAO{
 	public List<Map<String, Object>> getOrdersBySatus(String status) throws SQLException {
 		// TODO Auto-generated method stub
 		
+
+		
+		return null;
+	
+	}
+
+	@Override
+	public List<Map<String, Object>> getOrdersByStatusAndCustormerId(String status, int custId) throws SQLException {
+		// TODO Auto-generated method stub
+		
 		
 		List<Map<String, Object>> orders = new ArrayList<>();
 
 		try (Connection connection = dbconnection.getConnection()) {
-			String selectAllProductsSQL = "SELECT * FROM Order";
+			String selectAllProductsSQL = "SELECT * FROM Orderr";  //SELECT * FROM Product
 
 			try (PreparedStatement preparedStatement = connection.prepareStatement(selectAllProductsSQL)) {
 				try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -123,10 +133,10 @@ public class OrderDAO implements IOrderDAO{
 
 //						int productId = resultSet.getInt("ProductID");
 						order.put("orderId", resultSet.getInt("OrderID"));
-						order.put("userid", resultSet.getString("UserID"));
+						order.put("userid", resultSet.getInt("UserID"));
 						order.put("date", resultSet.getString("OrderDate"));
-						order.put("status", resultSet.getBigDecimal("Status"));
-						order.put("address", resultSet.getInt("shipAddress"));
+						order.put("status", resultSet.getString("Status"));
+						order.put("address", resultSet.getString("shipAddress"));
 
 
 						orders.add(order);
@@ -138,13 +148,6 @@ public class OrderDAO implements IOrderDAO{
 		return orders;
 		
 		
-	
-	}
-
-	@Override
-	public List<Map<String, Object>> getOrdersByStatusAndCustormerId(String status, int custId) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
