@@ -105,49 +105,134 @@ public class OrderDAO implements IOrderDAO{
 		
 		
 	}
-
+	
 	@Override
 	public List<Map<String, Object>> getOrdersBySatus(String status) throws SQLException {
-		// TODO Auto-generated method stub
-		
+	    List<Map<String, Object>> orders = new ArrayList<>();
 
-		
-		return null;
+	    try (Connection connection = dbconnection.getConnection()) {
+	        // Updated SQL query to include a condition for status
+	        String selectOrdersSQL = "SELECT * FROM Orderr WHERE Status = ?";
+
+	        try (PreparedStatement preparedStatement = connection.prepareStatement(selectOrdersSQL)) {
+	            // Set the parameter for the query
+	            preparedStatement.setString(1, status);
+
+	            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+	                while (resultSet.next()) {
+	                    Map<String, Object> order = new HashMap<>();
+	                    order.put("orderId", resultSet.getInt("OrderID"));
+	                    order.put("userid", resultSet.getInt("UserID"));
+	                    order.put("date", resultSet.getString("OrderDate"));
+	                    order.put("status", resultSet.getString("Status"));
+	                    order.put("address", resultSet.getString("shipAddress"));
+
+	                    orders.add(order);
+	                }
+	            }
+	        }
+	    }
+
+	    return orders;
+	}
+
+
+//	@Override
+//	public List<Map<String, Object>> getOrdersBySatus(String status) throws SQLException {
+//		
+//		List<Map<String, Object>> orders = new ArrayList<>();
+//
+//		try (Connection connection = dbconnection.getConnection()) {
+//			String selectAllProductsSQL = "SELECT * FROM Orderr";  
+//
+//			try (PreparedStatement preparedStatement = connection.prepareStatement(selectAllProductsSQL)) {
+//				try (ResultSet resultSet = preparedStatement.executeQuery()) {
+//					while (resultSet.next()) {
+//						Map<String, Object> order = new HashMap<>();
+//
+////						int productId = resultSet.getInt("ProductID");
+//						order.put("orderId", resultSet.getInt("OrderID"));
+//						order.put("userid", resultSet.getInt("UserID"));
+//						order.put("date", resultSet.getString("OrderDate"));
+//						order.put("status", resultSet.getString("Status"));
+//						order.put("address", resultSet.getString("shipAddress"));
+//
+//
+//						orders.add(order);
+//					}
+//				}
+//			}
+//		}
+//
+//		return orders;
+//	
+//	}
+
 	
-	}
-
+	
 	@Override
-	public List<Map<String, Object>> getOrdersByStatusAndCustormerId(String status, int custId) throws SQLException {
-		// TODO Auto-generated method stub
-		
-		
-		List<Map<String, Object>> orders = new ArrayList<>();
+	public List<Map<String, Object>> getOrdersByStatusAndCustormerId(String status, int userId) throws SQLException {
+	    List<Map<String, Object>> orders = new ArrayList<>();
 
-		try (Connection connection = dbconnection.getConnection()) {
-			String selectAllProductsSQL = "SELECT * FROM Orderr";  //SELECT * FROM Product
+	    try (Connection connection = dbconnection.getConnection()) {
+	        // Updated SQL query to include a condition for both status and user ID
+	        String selectOrdersSQL = "SELECT * FROM Orderr WHERE Status = ? AND UserID = ?";
 
-			try (PreparedStatement preparedStatement = connection.prepareStatement(selectAllProductsSQL)) {
-				try (ResultSet resultSet = preparedStatement.executeQuery()) {
-					while (resultSet.next()) {
-						Map<String, Object> order = new HashMap<>();
+	        try (PreparedStatement preparedStatement = connection.prepareStatement(selectOrdersSQL)) {
+	            // Set parameters for the query
+	            preparedStatement.setString(1, status);
+	            preparedStatement.setInt(2, userId);
 
-//						int productId = resultSet.getInt("ProductID");
-						order.put("orderId", resultSet.getInt("OrderID"));
-						order.put("userid", resultSet.getInt("UserID"));
-						order.put("date", resultSet.getString("OrderDate"));
-						order.put("status", resultSet.getString("Status"));
-						order.put("address", resultSet.getString("shipAddress"));
+	            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+	                while (resultSet.next()) {
+	                    Map<String, Object> order = new HashMap<>();
+	                    order.put("orderId", resultSet.getInt("OrderID"));
+	                    order.put("userid", resultSet.getInt("UserID"));
+	                    order.put("date", resultSet.getString("OrderDate"));
+	                    order.put("status", resultSet.getString("Status"));
+	                    order.put("address", resultSet.getString("shipAddress"));
 
+	                    orders.add(order);
+	                }
+	            }
+	        }
+	    }
 
-						orders.add(order);
-					}
-				}
-			}
-		}
-
-		return orders;
-		
-		
+	    return orders;
 	}
+	
+//	@Override
+//	public List<Map<String, Object>> getOrdersByStatusAndCustormerId(String status, int custId) throws SQLException {
+//		// TODO Auto-generated method stub
+//		
+//		
+//		List<Map<String, Object>> orders = new ArrayList<>();
+//
+//		try (Connection connection = dbconnection.getConnection()) {
+//			String selectAllProductsSQL = "SELECT * FROM Orderr";  
+//
+//			try (PreparedStatement preparedStatement = connection.prepareStatement(selectAllProductsSQL)) {
+//				try (ResultSet resultSet = preparedStatement.executeQuery()) {
+//					while (resultSet.next()) {
+//						Map<String, Object> order = new HashMap<>();
+//
+////						int productId = resultSet.getInt("ProductID");
+//						order.put("orderId", resultSet.getInt("OrderID"));
+//						order.put("userid", resultSet.getInt("UserID"));
+//						order.put("date", resultSet.getString("OrderDate"));
+//						order.put("status", resultSet.getString("Status"));
+//						order.put("address", resultSet.getString("shipAddress"));
+//
+//
+//						orders.add(order);
+//					}
+//				}
+//			}
+//		}
+//
+//		return orders;
+//		
+//		
+//	}
 
 }

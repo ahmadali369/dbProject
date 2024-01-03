@@ -5,14 +5,20 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 import bll.Interfaces.IBLLFacade;
 
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.Map;
 import java.awt.event.ActionEvent;
 
 public class manageOrders extends JFrame {
@@ -20,6 +26,8 @@ public class manageOrders extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private IBLLFacade bllFacade;
+	private int id;
+	private int tableRow = -1;
 
 	/**
 	 * Launch the application.
@@ -42,7 +50,7 @@ public class manageOrders extends JFrame {
 	 */
 	public manageOrders(IBLLFacade blIbllFacade) {
 		bllFacade = blIbllFacade; 
-		
+		List<Map<String, Object>> order1 = bllFacade.getOrdersByStatusAndCustormerId("pending", bllFacade.getUserid());
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 770, 640);
 		contentPane = new JPanel();
@@ -60,9 +68,78 @@ public class manageOrders extends JFrame {
 		lblNewLabel_1.setBounds(26, 55, 99, 16);
 		contentPane.add(lblNewLabel_1);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(26, 83, 332, 178);
-		contentPane.add(scrollPane);
+//		JScrollPane scrollPane = new JScrollPane();
+//		scrollPane.setBounds(26, 83, 332, 178);
+//		contentPane.add(scrollPane);
+		
+		
+		
+
+		if (order1.isEmpty()) {
+
+		} else {
+//			listPanel.removeAll();
+			DefaultTableModel model = new DefaultTableModel();
+			DefaultTableModel idmodel = new DefaultTableModel();
+
+			model.addColumn("order id");
+			model.addColumn("Address");
+			model.addColumn("date");
+			model.addColumn("satus");
+			
+			idmodel.addColumn("userid");
+
+			for (Map<String, Object> order : order1) {
+				model.addRow(
+						new Object[] { order.get("orderId"), order.get("address"), order.get("date"),
+								order.get("status"), order.get("totalPoems"), });
+				idmodel.addRow(new Object[] { order.get("orderId"), });
+
+			}
+
+			JTable table = new JTable(model);
+			JTable idtable = new JTable(idmodel);
+//			JScrollPane scrollPane = new JScrollPane(table);
+			JScrollPane scrollPane = new JScrollPane(table);
+			scrollPane.setBounds(26, 83, 332, 178);
+			
+			
+
+			table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+				@Override
+				public void valueChanged(ListSelectionEvent e) {
+					if (!e.getValueIsAdjusting()) {
+						int selectedRow = table.getSelectedRow();
+
+						if (selectedRow != -1) {
+							tableRow = selectedRow;
+
+							id = (int) idtable.getValueAt(tableRow, 0);
+							System.out.println("selected row" + tableRow);
+						}
+					}
+				}
+
+			});
+
+			contentPane.add(scrollPane);
+			
+//			listPanel.add(scrollPane);
+//			listPanel.revalidate();
+//			listPanel.repaint();
+
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		JButton openPendingButton = new JButton("Open Details");
 		openPendingButton.addActionListener(new ActionListener() {
