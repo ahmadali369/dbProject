@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import bll.Interfaces.IBLLFacade;
+import transerferObjects.OrderTO;
 import transerferObjects.ProductTO;
 
 import javax.swing.JLabel;
@@ -120,6 +121,10 @@ public class PlaceOrder extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				
+				OrderTO orderTO= new OrderTO();  
+				
+//				System.out.println("-----" +bllFacade.getUserid());
+//				System.out.println("-------" + shippingAddressPane.getText());
 				
 			}
 		});

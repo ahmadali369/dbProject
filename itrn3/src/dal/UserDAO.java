@@ -22,64 +22,7 @@ public class UserDAO implements IUserDAO{
 		return userid;
 	}
 
-
-	@Override
-	public boolean addNewUser(UserTO userNewTO) throws SQLException {
-		Connection connection = null;
-		try {
-			connection = dbconnection.getConnection();
-			connection.setAutoCommit(false);
-
-	        String insertUserSQL = "INSERT INTO User (FirstName, LastName, EmailAddress, Password, HomeAddress) VALUES (?, ?, ?, ?, ?)";
-	        
-			try (PreparedStatement preparedStatement = connection.prepareStatement(insertUserSQL,
-					Statement.RETURN_GENERATED_KEYS)) {
-				preparedStatement.setString(1, userNewTO.getFname());
-				preparedStatement.setString(2, userNewTO.getLname());
-				preparedStatement.setString(3, userNewTO.getEmail());
-				preparedStatement.setString(4, userNewTO.getPassword());
-				preparedStatement.setString(5, userNewTO.getAddress());
-
-//				preparedStatement.executeUpdate();
-				
-
-                try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                	connection.commit();
-                    if (resultSet.next()) {
-                        int userID = resultSet.getInt("UserID");
-                        userid = userID; 
-                        
-//                        System.out.println("Login successful. UserID: " + userID);
-                    } else {
-//                        System.out.println("Invalid email address or password.");
-                    }
-                }
-				
-				
-				
-				return true;
-
-			}
-
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-
-//			logger.debug("InsetBook Func thrown an Exception");
-
-			if (connection != null) {
-				connection.rollback();
-			}
-
-			e.printStackTrace();
-		} finally {
-			if (connection != null) {
-				connection.close();
-			}
-		}
-		return false;
-	}
-
+	
 	@Override
 	public boolean loginUser(UserTO userOldTO) throws SQLException {
 		// TODO Auto-generated method stub
@@ -95,9 +38,9 @@ public class UserDAO implements IUserDAO{
                     if (resultSet.next()) {
                         int userID = resultSet.getInt("UserID");
                         userid = userID; 
-                        System.out.println("Login successful. UserID: " + userID);
+//                        System.out.println("Login successful. UserID: " + userID);
                     } else {
-                        System.out.println("Invalid email address or password.");
+//                        System.out.println("Invalid email address or password.");
                     }
                 }
             }
@@ -109,6 +52,54 @@ public class UserDAO implements IUserDAO{
 		
 		return false;
 	}
+	
+	
+	@Override
+	public boolean addNewUser(UserTO userNewTO) throws SQLException {
+	    Connection connection = null;
+	    try {
+	        connection = dbconnection.getConnection();
+	        connection.setAutoCommit(false);
+
+	        String insertUserSQL = "INSERT INTO User (FirstName, LastName, EmailAddress, Password, HomeAddress) VALUES (?, ?, ?, ?, ?)";
+
+	        try (PreparedStatement preparedStatement = connection.prepareStatement(insertUserSQL, Statement.RETURN_GENERATED_KEYS)) {
+	            preparedStatement.setString(1, userNewTO.getFname());
+	            preparedStatement.setString(2, userNewTO.getLname());
+	            preparedStatement.setString(3, userNewTO.getEmail());
+	            preparedStatement.setString(4, userNewTO.getPassword());
+	            preparedStatement.setString(5, userNewTO.getAddress());
+
+	            int rowsAffected = preparedStatement.executeUpdate();
+
+	            if (rowsAffected > 0) {
+	                try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+	                    if (generatedKeys.next()) {
+	                        int userID = generatedKeys.getInt(1);
+	                        userid = userID;
+	                    }
+	                }
+	                connection.commit();
+	                return true;
+	            } else {
+	                // Handle the case where no rows were affected (insertion failed)
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+
+	        if (connection != null) {
+	            connection.rollback();
+	        }
+	    } finally {
+	        if (connection != null) {
+	            connection.close();
+	        }
+	    }
+	    return false;
+	}
+
+
 
 	@Override
 	public void storeUserActivity(ActivityTO activityTO) throws SQLException {
