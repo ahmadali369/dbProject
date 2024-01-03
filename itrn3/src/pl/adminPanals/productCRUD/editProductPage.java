@@ -242,6 +242,22 @@ public class editProductPage extends JFrame {
 		JLabel lblNewLabel_1_2_2 = new JLabel("Cost");
 		lblNewLabel_1_2_2.setBounds(300, 363, 61, 16);
 		contentPane.add(lblNewLabel_1_2_2);
+		
+		JButton btnNewButton = new JButton("Del product");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+//				ProductTO productTO = new ProductTO(); 
+				
+				
+				
+				bllFacade.deleteProduct(cart.get(0));
+				
+				
+				
+			}
+		});
+		btnNewButton.setBounds(50, 410, 117, 29);
+		contentPane.add(btnNewButton);
 	}
 
 }

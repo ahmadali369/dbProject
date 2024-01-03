@@ -125,7 +125,7 @@ public class ProductDAO implements IProductDAO {
 				ResultSet generatedKeys = preparedStatement2.getGeneratedKeys();
 
 				if (generatedKeys.next()) {
-					// Retrieve the generated key (assuming it's an auto-incremented primary key)
+
 					Long generatedKey = generatedKeys.getLong(1);
 					return Integer.parseInt(generatedKey.toString());
 
@@ -137,7 +137,6 @@ public class ProductDAO implements IProductDAO {
 				System.out.println("Insertion failed, no rows affected.");
 			}
 
-			// Close the resources
 			preparedStatement2.close();
 
 			connection.close();
@@ -158,6 +157,7 @@ public class ProductDAO implements IProductDAO {
 			String selectAllProductsSQL = "SELECT * FROM Product";
 
 			try (PreparedStatement preparedStatement = connection.prepareStatement(selectAllProductsSQL)) {
+
 				try (ResultSet resultSet = preparedStatement.executeQuery()) {
 					while (resultSet.next()) {
 						Map<String, Object> product = new HashMap<>();
@@ -180,6 +180,55 @@ public class ProductDAO implements IProductDAO {
 					}
 				}
 			}
+		}
+
+		return products;
+	}
+
+	@Override
+	public List<Map<String, Object>> getProductsForOrderDetail(int orderDetailID) throws SQLException {
+		List<Map<String, Object>> products = new ArrayList<>();
+
+		try (Connection connection = dbconnection.getConnection()) {
+			String sql = "SELECT p.* " + "FROM Product p " + "JOIN OrderDetail od ON p.ProductID = od.ProductID "
+					+ "WHERE od.OrderDetailID = ?";
+			try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+				preparedStatement.setInt(1, orderDetailID);
+
+				try (ResultSet resultSet = preparedStatement.executeQuery()) {
+					while (resultSet.next()) {
+						Map<String, Object> product = new HashMap<>();
+
+						int productId = resultSet.getInt("ProductID");
+						product.put("productId", productId);
+
+						System.out.println(" =====" + productId);
+						product.put("name", resultSet.getString("Name"));
+						product.put("description", resultSet.getString("Description"));
+						product.put("price", resultSet.getBigDecimal("Price"));
+						product.put("quantity", resultSet.getInt("Quantity"));
+						product.put("categoryId", resultSet.getInt("CategoryID"));
+						product.put("imageId", resultSet.getInt("ImageID"));
+						product.put("cost", resultSet.getBigDecimal("Cost"));
+
+						product.put("imagePath", resultSet.getString("ImagePath"));
+
+						product.put("imgBytes", getImgBytes(productId));
+
+						products.add(product);
+
+					}
+				}
+
+			} catch (Exception e) {
+
+				e.printStackTrace();
+				// TODO: handle exception
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
 		}
 
 		return products;
@@ -211,10 +260,9 @@ public class ProductDAO implements IProductDAO {
 	@Override
 	public void updateProduct(ProductTO productTO) throws SQLException {
 
-		
 //		int imgid = storeImage(productTO.getImgPathString());
 		int catid = getCatgoryId(productTO.getCatagory());
-		
+
 		productTO.printProductDetails();
 
 		Connection connection = null;
@@ -259,6 +307,15 @@ public class ProductDAO implements IProductDAO {
 	@Override
 	public void deleteProduct(ProductTO productTO) throws SQLException {
 		// TODO Auto-generated method stub
+		
+		try (Connection connection = dbconnection.getConnection()) {
+			String deleteBookSQL = "DELETE FROM product WHERE ProductID = ? ";
+			try (PreparedStatement preparedStatement = connection.prepareStatement(deleteBookSQL)) {
+				preparedStatement.setInt(1, productTO.getProductid());
+				preparedStatement.executeUpdate(); 
+			}}
+		
+		
 
 	}
 

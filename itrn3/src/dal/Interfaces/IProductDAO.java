@@ -20,4 +20,6 @@ public interface IProductDAO {
 
 	public void deleteProduct(ProductTO productTO) throws SQLException;
 
+	
+	 public List<Map<String, Object>> getProductsForOrderDetail(int orderDetailID) throws SQLException;
 }

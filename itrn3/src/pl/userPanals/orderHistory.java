@@ -144,6 +144,8 @@ public class orderHistory extends JFrame {
 
 							id = (int) idtable.getValueAt(tableRow, 0);
 							System.out.println("selected row" + tableRow);
+							System.out.println("idO----" + id);
+							
 						}
 					}
 				}
@@ -151,38 +153,29 @@ public class orderHistory extends JFrame {
 			});
 
 			contentPane.add(scrollPane);
-			
-//			listPanel.add(scrollPane);
-//			listPanel.revalidate();
-//			listPanel.repaint();
-
-//		}
-		
-		
-		
-
-		
-		
-		
-		
-		
-		
-		
-		
-		JButton reloadButton = new JButton("reload");
-		reloadButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		reloadButton.setBounds(601, 31, 117, 29);
-		contentPane.add(reloadButton);
 		
 		JButton openOrderDetailsButton = new JButton("Open Order Details");
 		openOrderDetailsButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				orderDetails frame = new orderDetails(bllFacade, id);
+				frame.setVisible(true);
+				
+				
+				
 			}
 		});
 		openOrderDetailsButton.setBounds(439, 31, 150, 29);
 		contentPane.add(openOrderDetailsButton);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				bllFacade.changeOrderStatus(id, "Canceled");
+				
+			}
+		});
+		btnNewButton.setBounds(601, 31, 117, 29);
+		contentPane.add(btnNewButton);
 	}
 }

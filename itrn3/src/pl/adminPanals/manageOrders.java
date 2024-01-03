@@ -61,6 +61,7 @@ public class manageOrders extends JFrame {
 		List<Map<String, Object>> order2 = bllFacade.getOrdersBySatus("processing");
 		List<Map<String, Object>> order3 = bllFacade.getOrdersBySatus("shipped");
 		List<Map<String, Object>> order4 = bllFacade.getOrdersBySatus("delivered");
+		List<Map<String, Object>> order5 = bllFacade.getOrdersBySatus("Canceled");
 		
 		
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -363,7 +364,7 @@ public class manageOrders extends JFrame {
 //		contentPane.add(scrollPane_3);
 		
 		
-		if (order4.isEmpty()) {
+		if (order4.isEmpty() && order5.isEmpty()) {
 
 		} else {
 //			listPanel.removeAll();
@@ -378,6 +379,13 @@ public class manageOrders extends JFrame {
 			idmodel.addColumn("userid");
 
 			for (Map<String, Object> order : order4) {
+				model.addRow(
+						new Object[] { order.get("orderId"), order.get("address"), order.get("date"),
+								order.get("status"), order.get("totalPoems"), });
+				idmodel.addRow(new Object[] { order.get("orderId"), });
+
+			}
+			for (Map<String, Object> order : order5) {
 				model.addRow(
 						new Object[] { order.get("orderId"), order.get("address"), order.get("date"),
 								order.get("status"), order.get("totalPoems"), });
@@ -424,7 +432,7 @@ public class manageOrders extends JFrame {
 		openDeliveredButton.setBounds(408, 543, 117, 29);
 		contentPane.add(openDeliveredButton);
 		
-		JLabel lblNewLabel_1_3 = new JLabel("Delivered Orders");
+		JLabel lblNewLabel_1_3 = new JLabel("Delivered/Canceled Orders");
 		lblNewLabel_1_3.setBounds(408, 330, 117, 16);
 		contentPane.add(lblNewLabel_1_3);
 	}

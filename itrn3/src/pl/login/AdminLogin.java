@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 import bll.Interfaces.IBLLFacade;
 import pl.adminPanals.AdminLandingPage;
+import transerferObjects.ActivityTO;
 import transerferObjects.UserTO;
 
 import javax.swing.JLabel;
@@ -89,6 +90,7 @@ public class AdminLogin extends JFrame {
 				
 				bllFacade.loginUser(userTO); 
 				
+
 				
 				AdminLandingPage frame = new AdminLandingPage(bllFacade);
 				frame.setVisible(true);

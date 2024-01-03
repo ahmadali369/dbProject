@@ -105,11 +105,30 @@ public class UserDAO implements IUserDAO{
 	public void storeUserActivity(ActivityTO activityTO) throws SQLException {
 		// TODO Auto-generated method stub
 		
+        String sql = "INSERT INTO UserActivity (UserID, Action, Timestamp) VALUES (?, ?, ?)";
+
+        try (Connection connection = dbconnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setInt(1, activityTO.getUserid());
+            preparedStatement.setString(2, activityTO.getActivityString());
+            preparedStatement.setTimestamp(3, new java.sql.Timestamp(System.currentTimeMillis()));
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // TODO: Handle the exception as needed
+            throw e; // Propagate the exception if necessary
+        }
+		
 	}
 
 	@Override
 	public List<Map<String, Object>> getAllUsers() throws SQLException {
 		// TODO Auto-generated method stub
+		
+		
+		
 		return null;
 	}
 

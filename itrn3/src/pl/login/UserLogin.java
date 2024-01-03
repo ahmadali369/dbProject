@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 import bll.Interfaces.IBLLFacade;
 import pl.userPanals.UserLandingPage;
+import transerferObjects.ActivityTO;
 import transerferObjects.UserTO;
 
 import javax.swing.JTextField;
@@ -94,7 +95,11 @@ public class UserLogin extends JFrame {
 		JButton userSignupButton = new JButton("SignUp");
 		userSignupButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+//				
+//				ActivityTO activityTO = new ActivityTO(); 
+//				activityTO.setUserid(bllFacade.getUserid());
+//				activityTO.setActivityString("user signup"); 
+//				bllFacade.storeUserActivity(activityTO);
 				
 				
 				UserSignUp frame = new UserSignUp(bllFacade);

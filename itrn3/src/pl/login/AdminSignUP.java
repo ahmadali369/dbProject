@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 import bll.Interfaces.IBLLFacade;
 import pl.adminPanals.AdminLandingPage;
+import transerferObjects.ActivityTO;
 import transerferObjects.UserTO;
 
 import javax.swing.JLabel;
@@ -133,7 +134,7 @@ public class AdminSignUP extends JFrame {
 				
 				bllFacade.addNewUser(userTO); 
 				
-				
+
 				
 				
 				AdminLandingPage frame = new AdminLandingPage(bllFacade);

@@ -116,6 +116,67 @@ public class DBconfig {
 				}
    /// cat ====             
                 
+                
+//                String createUserTableSQL = "CREATE TABLE IF NOT EXISTS User (" +
+//                        "UserId BIGINT AUTO_INCREMENT PRIMARY KEY," +
+//                        "FirstName VARCHAR(255) NOT NULL," +
+//                        "LastName VARCHAR(255) NOT NULL," +
+//                        "EmailAddress VARCHAR(255) NOT NULL UNIQUE," +
+//                        "Password VARCHAR(255) NOT NULL," +
+//                        "HomeAddress VARCHAR(255)" +
+//                        ")";
+//
+//                String createProductTableSQL = "CREATE TABLE IF NOT EXISTS Product (" +
+//                        "ProductId BIGINT AUTO_INCREMENT PRIMARY KEY," +
+//                        "Name VARCHAR(255)," +
+//                        "Description VARCHAR(255)," +
+//                        "Price DECIMAL(10, 2)," +
+//                        "Quantity INT NOT NULL," +
+//                        "CategoryId INT," +
+//                        "ImageId INT," +
+//                        "Cost DECIMAL(10, 2) NOT NULL," +
+//                        "ImagePath VARCHAR(255)," +
+//                        "FOREIGN KEY (ImageId) REFERENCES images(id) ON DELETE CASCADE ON UPDATE CASCADE" +
+//                        ")";
+//
+//                String createOrderTableSQL = "CREATE TABLE IF NOT EXISTS Orderr (" +
+//                        "OrderId BIGINT AUTO_INCREMENT PRIMARY KEY," +
+//                        "UserId BIGINT," +
+//                        "OrderDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP," +
+//                        "Status VARCHAR(50) NOT NULL," +
+//                        "ShipAddress VARCHAR(255)," +
+//                        "FOREIGN KEY (UserId) REFERENCES User(UserId) ON DELETE CASCADE ON UPDATE CASCADE" +
+//                        ")";
+//
+//                String createOrderDetailTableSQL = "CREATE TABLE IF NOT EXISTS OrderDetail (" +
+//                        "OrderDetailId BIGINT AUTO_INCREMENT PRIMARY KEY," +
+//                        "OrderId BIGINT," +
+//                        "ProductId BIGINT," +
+//                        "Quantity INT NOT NULL," +
+//                        "FOREIGN KEY (OrderId) REFERENCES Orderr(OrderId) ON DELETE CASCADE," +
+//                        "FOREIGN KEY (ProductId) REFERENCES Product(ProductId) ON DELETE CASCADE" +
+//                        ")";
+//
+//                String createUserActivityLogTableSQL = "CREATE TABLE IF NOT EXISTS UserActivityLog (" +
+//                        "LogId BIGINT AUTO_INCREMENT PRIMARY KEY," +
+//                        "UserId BIGINT," +
+//                        "ActivityType VARCHAR(50) NOT NULL," +
+//                        "Timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP," +
+//                        "FOREIGN KEY (UserId) REFERENCES User(UserId) ON DELETE CASCADE ON UPDATE CASCADE" +
+//                        ")";
+
+//==========
+                
+                String createUserTableSQL = "CREATE TABLE IF NOT EXISTS User (" +
+                        "UserID INT AUTO_INCREMENT PRIMARY KEY," +
+                        "FirstName VARCHAR(255) NOT NULL," +
+                        "LastName VARCHAR(255) NOT NULL," +
+                        "EmailAddress VARCHAR(255) NOT NULL UNIQUE," +
+                        "Password VARCHAR(255) NOT NULL," +
+                        "HomeAddress VARCHAR(255)" +
+                        ")";
+                
+                statement.executeUpdate(createUserTableSQL);   
             	
             	
             String createProductTableSQL = "CREATE TABLE IF NOT EXISTS Product (" +
@@ -128,21 +189,11 @@ public class DBconfig {
                     "ImageID INT," +
                     "Cost DECIMAL(10, 2) NOT NULL," +
                     "ImagePath VARCHAR(255)," +
-                    "FOREIGN KEY (ImageID) REFERENCES images(id)" +
+                    "FOREIGN KEY (ImageID) REFERENCES images(id) ON DELETE CASCADE ON UPDATE CASCADE" +
                     ")";
 
             statement.executeUpdate(createProductTableSQL);
-            
-            String createUserTableSQL = "CREATE TABLE IF NOT EXISTS User (" +
-                    "UserID INT AUTO_INCREMENT PRIMARY KEY," +
-                    "FirstName VARCHAR(255) NOT NULL," +
-                    "LastName VARCHAR(255) NOT NULL," +
-                    "EmailAddress VARCHAR(255) NOT NULL UNIQUE," +
-                    "Password VARCHAR(255) NOT NULL," +
-                    "HomeAddress VARCHAR(255)" +
-                    ")";
-            
-            statement.executeUpdate(createUserTableSQL);
+
             
             
             String createOrderTableSQL = "CREATE TABLE IF NOT EXISTS Orderr (" +
@@ -151,7 +202,7 @@ public class DBconfig {
                     "OrderDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP," +
                     "Status VARCHAR(50) NOT NULL," +
                     "shipAddress varchar(255)," +
-                    "FOREIGN KEY (UserID) REFERENCES User(UserID)" +
+                    "FOREIGN KEY (UserID) REFERENCES User(UserID)ON DELETE CASCADE ON UPDATE CASCADE" +
                     ")";
             statement.executeUpdate(createOrderTableSQL);
 
@@ -162,8 +213,8 @@ public class DBconfig {
                     "OrderID INT," +
                     "ProductID INT," +
                     "Quantity INT NOT NULL," +
-                    "FOREIGN KEY (OrderID) REFERENCES Orderr(OrderID)," +
-                    "FOREIGN KEY (ProductID) REFERENCES Product(ProductID)" +
+                    "FOREIGN KEY (OrderID) REFERENCES Orderr(OrderID)ON DELETE CASCADE," +
+                    "FOREIGN KEY (ProductID) REFERENCES Product(ProductID)ON DELETE CASCADE" +
                     ")";
             statement.executeUpdate(createOrderDetailTableSQL);
             
@@ -172,7 +223,7 @@ public class DBconfig {
                     "UserID INT," +
                     "ActivityType VARCHAR(50) NOT NULL," +
                     "Timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP," +
-                    "FOREIGN KEY (UserID) REFERENCES User(UserID)" +
+                    "FOREIGN KEY (UserID) REFERENCES User(UserID)ON DELETE CASCADE ON UPDATE CASCADE" +
                     ")";
             statement.executeUpdate(createUserActivityLogTableSQL);
             

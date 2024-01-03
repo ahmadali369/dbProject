@@ -78,4 +78,18 @@ public class ProductBLO implements IProductBLO{
 	}
 
 
+	@Override
+	public List<Map<String, Object>> getProductsForOrderDetail(int orderDetailID) {
+		// TODO Auto-generated method stub
+		try {
+			return dalFacade.getProductsForOrderDetail(orderDetailID);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		return null;
+	}
+
+
 }

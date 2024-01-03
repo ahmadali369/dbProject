@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 import bll.Interfaces.IBLLFacade;
 import pl.userPanals.UserLandingPage;
+import transerferObjects.ActivityTO;
 import transerferObjects.UserTO;
 
 import javax.swing.JLabel;
@@ -122,7 +123,11 @@ public class UserSignUp extends JFrame {
 		adminSignupButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-
+//
+//				ActivityTO activityTO = new ActivityTO(); 
+//				activityTO.setUserid(bllFacade.getUserid());
+//				activityTO.setActivityString("user signup"); 
+//				bllFacade.storeUserActivity(activityTO);
 				
 				
 				UserTO userTO = new UserTO(); 

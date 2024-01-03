@@ -151,4 +151,10 @@ public class BllFacade implements IBLLFacade {
 		return bllPo.getUserBLO().getUserid();
 	}
 
+	@Override
+	public List<Map<String, Object>> getProductsForOrderDetail(int orderDetailID) {
+		// TODO Auto-generated method stub
+		return bllPo.getProductBLO().getAllProdcutsByCatagory();
+	}
+
 }

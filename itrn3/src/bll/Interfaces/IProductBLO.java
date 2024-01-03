@@ -1,5 +1,6 @@
 package bll.Interfaces;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -16,4 +17,5 @@ public interface IProductBLO {
 	public void updateProdcut(ProductTO productTO);
 
 	public void deleteProduct(ProductTO productTO);
+	 public List<Map<String, Object>> getProductsForOrderDetail(int orderDetailID); 
 }

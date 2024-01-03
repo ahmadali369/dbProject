@@ -131,4 +131,10 @@ public class DalFacade implements IDalFacade {
 		return dalPO.getUserDAO().getUserid();
 	}
 
+	@Override
+	public List<Map<String, Object>> getProductsForOrderDetail(int orderDetailID) throws SQLException {
+		// TODO Auto-generated method stub
+		return dalPO.getProductDAO().getProductsForOrderDetail(orderDetailID);
+	}
+
 }
