@@ -5,7 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -99,13 +100,45 @@ public class OrderDAO implements IOrderDAO{
 	@Override
 	public void changeOrderStatus(int orderId, String status) throws SQLException {
 		// TODO Auto-generated method stub
+
+		
+		
 		
 	}
 
 	@Override
 	public List<Map<String, Object>> getOrdersBySatus(String status) throws SQLException {
 		// TODO Auto-generated method stub
-		return null;
+		
+		
+		List<Map<String, Object>> orders = new ArrayList<>();
+
+		try (Connection connection = dbconnection.getConnection()) {
+			String selectAllProductsSQL = "SELECT * FROM Order";
+
+			try (PreparedStatement preparedStatement = connection.prepareStatement(selectAllProductsSQL)) {
+				try (ResultSet resultSet = preparedStatement.executeQuery()) {
+					while (resultSet.next()) {
+						Map<String, Object> order = new HashMap<>();
+
+//						int productId = resultSet.getInt("ProductID");
+						order.put("orderId", resultSet.getInt("OrderID"));
+						order.put("userid", resultSet.getString("UserID"));
+						order.put("date", resultSet.getString("OrderDate"));
+						order.put("status", resultSet.getBigDecimal("Status"));
+						order.put("address", resultSet.getInt("shipAddress"));
+
+
+						orders.add(order);
+					}
+				}
+			}
+		}
+
+		return orders;
+		
+		
+	
 	}
 
 	@Override
