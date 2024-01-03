@@ -27,7 +27,14 @@ public class manageOrders extends JFrame {
 	private JPanel contentPane;
 	private IBLLFacade bllFacade;
 	private int id;
+	private int id2;
+	private int id3;
+	private int id4;
+
 	private int tableRow = -1;
+	private int table2Row = -1;
+	private int table3Row = -1;
+	private int table4Row = -1;
 
 	/**
 	 * Launch the application.
@@ -50,7 +57,12 @@ public class manageOrders extends JFrame {
 	 */
 	public manageOrders(IBLLFacade blIbllFacade) {
 		bllFacade = blIbllFacade; 
-		List<Map<String, Object>> order1 = bllFacade.getOrdersByStatusAndCustormerId("pending", bllFacade.getUserid());
+		List<Map<String, Object>> order1 = bllFacade.getOrdersBySatus("pending");
+		List<Map<String, Object>> order2 = bllFacade.getOrdersBySatus("processing");
+		List<Map<String, Object>> order3 = bllFacade.getOrdersBySatus("shipped");
+		List<Map<String, Object>> order4 = bllFacade.getOrdersBySatus("delivered");
+		
+		
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 770, 640);
 		contentPane = new JPanel();
@@ -92,14 +104,13 @@ public class manageOrders extends JFrame {
 			for (Map<String, Object> order : order1) {
 				model.addRow(
 						new Object[] { order.get("orderId"), order.get("address"), order.get("date"),
-								order.get("status"), order.get("totalPoems"), });
+								order.get("status") });
 				idmodel.addRow(new Object[] { order.get("orderId"), });
 
 			}
 
 			JTable table = new JTable(model);
 			JTable idtable = new JTable(idmodel);
-//			JScrollPane scrollPane = new JScrollPane(table);
 			JScrollPane scrollPane = new JScrollPane(table);
 			scrollPane.setBounds(26, 83, 332, 178);
 			
@@ -135,12 +146,6 @@ public class manageOrders extends JFrame {
 		
 		
 		
-		
-		
-		
-		
-		
-		
 		JButton openPendingButton = new JButton("Open Details");
 		openPendingButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -152,18 +157,101 @@ public class manageOrders extends JFrame {
 		JButton markAsProcessingButton = new JButton("Mark as Processing");
 		markAsProcessingButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+//				changeOrderStatus(); 
+				
+				bllFacade.changeOrderStatus(id, "processing");
+				
 			}
 		});
 		markAsProcessingButton.setBounds(146, 268, 175, 29);
 		contentPane.add(markAsProcessingButton);
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(408, 83, 332, 178);
-		contentPane.add(scrollPane_1);
+//		JScrollPane scrollPane_1 = new JScrollPane();
+//		scrollPane_1.setBounds(408, 83, 332, 178);
+//		
+//		contentPane.add(scrollPane_1);
+		
+		
+		
+		
+
+		if (order2.isEmpty()) {
+
+		} else {
+//			listPanel.removeAll();
+			DefaultTableModel model = new DefaultTableModel();
+			DefaultTableModel idmodel = new DefaultTableModel();
+
+			model.addColumn("order id");
+			model.addColumn("Address");
+			model.addColumn("date");
+			model.addColumn("satus");
+			
+			idmodel.addColumn("userid");
+
+			for (Map<String, Object> order : order2) {
+				model.addRow(
+						new Object[] { order.get("orderId"), order.get("address"), order.get("date"),
+								order.get("status"), order.get("totalPoems"), });
+				idmodel.addRow(new Object[] { order.get("orderId"), });
+
+			}
+
+			JTable table = new JTable(model);
+			JTable idtable = new JTable(idmodel);
+//			JScrollPane scrollPane = new JScrollPane(table);
+			JScrollPane scrollPane_1 = new JScrollPane(table);
+			scrollPane_1.setBounds(408, 83, 332, 178);
+			
+			
+
+			table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+				@Override
+				public void valueChanged(ListSelectionEvent e) {
+					if (!e.getValueIsAdjusting()) {
+						int selectedRow = table.getSelectedRow();
+
+						if (selectedRow != -1) {
+							table2Row = selectedRow;
+
+							id2 = (int) idtable.getValueAt(table2Row, 0);
+							System.out.println("selected row" + table2Row);
+						}
+					}
+				}
+
+			});
+
+			contentPane.add(scrollPane_1);
+			
+//			listPanel.add(scrollPane);
+//			listPanel.revalidate();
+//			listPanel.repaint();
+
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
 		
 		JButton markAsShippButton = new JButton("Mark As Shipped");
 		markAsShippButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				bllFacade.changeOrderStatus(id2, "shipped");
+				
 			}
 		});
 		markAsShippButton.setBounds(528, 268, 133, 29);
@@ -181,13 +269,78 @@ public class manageOrders extends JFrame {
 		lblNewLabel_1_1.setBounds(408, 55, 133, 16);
 		contentPane.add(lblNewLabel_1_1);
 		
-		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(26, 358, 332, 178);
-		contentPane.add(scrollPane_2);
+//		JScrollPane scrollPane_2 = new JScrollPane();
+//		scrollPane_2.setBounds(26, 358, 332, 178);
+//		contentPane.add(scrollPane_2);
+		
+		
+		
+		if (order3.isEmpty()) {
+
+		} else {
+//			listPanel.removeAll();
+			DefaultTableModel model = new DefaultTableModel();
+			DefaultTableModel idmodel = new DefaultTableModel();
+
+			model.addColumn("order id");
+			model.addColumn("Address");
+			model.addColumn("date");
+			model.addColumn("satus");
+			
+			idmodel.addColumn("userid");
+
+			for (Map<String, Object> order : order3) {
+				model.addRow(
+						new Object[] { order.get("orderId"), order.get("address"), order.get("date"),
+								order.get("status"), order.get("totalPoems"), });
+				idmodel.addRow(new Object[] { order.get("orderId"), });
+
+			}
+
+			JTable table = new JTable(model);
+			JTable idtable = new JTable(idmodel);
+			JScrollPane scrollPane_2 = new JScrollPane(table);
+			scrollPane_2.setBounds(26, 358, 332, 178);
+			
+			
+
+			table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+				@Override
+				public void valueChanged(ListSelectionEvent e) {
+					if (!e.getValueIsAdjusting()) {
+						int selectedRow = table.getSelectedRow();
+
+						if (selectedRow != -1) {
+							table3Row = selectedRow;
+
+							id3 = (int) idtable.getValueAt(table3Row, 0);
+							System.out.println("selected row" + table3Row);
+						}
+					}
+				}
+
+			});
+
+			contentPane.add(scrollPane_2);
+			
+//			listPanel.add(scrollPane);
+//			listPanel.revalidate();
+//			listPanel.repaint();
+
+		}
+		
+		
+		
+		
 		
 		JButton markAsDeliverdButton = new JButton("Mark as Delivered");
 		markAsDeliverdButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				bllFacade.changeOrderStatus(id3, "delivered");
+				
+				
+				
 			}
 		});
 		markAsDeliverdButton.setBounds(146, 543, 156, 29);
@@ -205,9 +358,63 @@ public class manageOrders extends JFrame {
 		lblNewLabel_1_2.setBounds(26, 330, 99, 16);
 		contentPane.add(lblNewLabel_1_2);
 		
-		JScrollPane scrollPane_3 = new JScrollPane();
-		scrollPane_3.setBounds(408, 358, 332, 178);
-		contentPane.add(scrollPane_3);
+//		JScrollPane scrollPane_3 = new JScrollPane();
+//		scrollPane_3.setBounds(408, 358, 332, 178);
+//		contentPane.add(scrollPane_3);
+		
+		
+		if (order4.isEmpty()) {
+
+		} else {
+//			listPanel.removeAll();
+			DefaultTableModel model = new DefaultTableModel();
+			DefaultTableModel idmodel = new DefaultTableModel();
+
+			model.addColumn("order id");
+			model.addColumn("Address");
+			model.addColumn("date");
+			model.addColumn("satus");
+			
+			idmodel.addColumn("userid");
+
+			for (Map<String, Object> order : order4) {
+				model.addRow(
+						new Object[] { order.get("orderId"), order.get("address"), order.get("date"),
+								order.get("status"), order.get("totalPoems"), });
+				idmodel.addRow(new Object[] { order.get("orderId"), });
+
+			}
+
+			JTable table = new JTable(model);
+			JTable idtable = new JTable(idmodel);
+			JScrollPane scrollPane_3 = new JScrollPane(table);
+			scrollPane_3.setBounds(408, 358, 332, 178);
+			
+			
+
+			table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+				@Override
+				public void valueChanged(ListSelectionEvent e) {
+					if (!e.getValueIsAdjusting()) {
+						int selectedRow = table.getSelectedRow();
+
+						if (selectedRow != -1) {
+							table4Row = selectedRow;
+
+							id4 = (int) idtable.getValueAt(table4Row, 0);
+							System.out.println("selected row" + table4Row);
+						}
+					}
+				}
+
+			});
+
+			contentPane.add(scrollPane_3);
+
+
+		}
+
+		
 		
 		JButton openDeliveredButton = new JButton("Open Details");
 		openDeliveredButton.addActionListener(new ActionListener() {

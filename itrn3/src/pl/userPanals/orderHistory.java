@@ -51,6 +51,9 @@ public class orderHistory extends JFrame {
 	public orderHistory(IBLLFacade ibllFacade) {
 		bllFacade = ibllFacade; 
 		List<Map<String, Object>> order1 = bllFacade.getOrdersByStatusAndCustormerId("pending", bllFacade.getUserid());
+		List<Map<String, Object>> order2 = bllFacade.getOrdersByStatusAndCustormerId("processing", bllFacade.getUserid());
+		List<Map<String, Object>> order3 = bllFacade.getOrdersByStatusAndCustormerId("shipped", bllFacade.getUserid());
+		List<Map<String, Object>> order4 = bllFacade.getOrdersByStatusAndCustormerId("delivered", bllFacade.getUserid());
 		
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 738, 689);
@@ -77,10 +80,10 @@ public class orderHistory extends JFrame {
 		
 		
 
-		if (order1.isEmpty()) {
+//		if (order1.isEmpty() ) {
+//
+//		} else {
 
-		} else {
-//			listPanel.removeAll();
 			DefaultTableModel model = new DefaultTableModel();
 			DefaultTableModel idmodel = new DefaultTableModel();
 
@@ -94,10 +97,33 @@ public class orderHistory extends JFrame {
 			for (Map<String, Object> order : order1) {
 				model.addRow(
 						new Object[] { order.get("orderId"), order.get("address"), order.get("date"),
-								order.get("status"), order.get("totalPoems"), });
+								order.get("status") });
 				idmodel.addRow(new Object[] { order.get("orderId"), });
 
 			}
+			
+			for (Map<String, Object> order : order2) {
+				model.addRow(
+						new Object[] { order.get("orderId"), order.get("address"), order.get("date"),
+								order.get("status") });
+				idmodel.addRow(new Object[] { order.get("orderId"), });
+
+			}
+			for (Map<String, Object> order : order3) {
+				model.addRow(
+						new Object[] { order.get("orderId"), order.get("address"), order.get("date"),
+								order.get("status") });
+				idmodel.addRow(new Object[] { order.get("orderId"), });
+
+			}
+			for (Map<String, Object> order : order4) {
+				model.addRow(
+						new Object[] { order.get("orderId"), order.get("address"), order.get("date"),
+								order.get("status") });
+				idmodel.addRow(new Object[] { order.get("orderId"), });
+
+			}
+			
 
 			JTable table = new JTable(model);
 			JTable idtable = new JTable(idmodel);
@@ -130,7 +156,7 @@ public class orderHistory extends JFrame {
 //			listPanel.revalidate();
 //			listPanel.repaint();
 
-		}
+//		}
 		
 		
 		
