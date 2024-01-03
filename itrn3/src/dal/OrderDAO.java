@@ -15,31 +15,11 @@ public class OrderDAO implements IOrderDAO{
 
 	
 	DBconfig dbconnection = DBconfig.getInstance();
-//	@Override
-//	public void placeOrder(OrderTO orderTO) throws SQLException {
-//		// TODO Auto-generated method stub
-//		try (Connection connection = dbconnection.getConnection()) {
-//		String insertOrderSQL = "INSERT INTO `Order` (UserID, Status, shipAddress) VALUES (?, ?, ?)";
-//		
-//	     try (PreparedStatement preparedStatement = connection.prepareStatement(insertOrderSQL)) {
-//	            preparedStatement.setInt(1, orderTO.getCustomerID());
-//	            preparedStatement.setString(2, orderTO.getStatus());
-//	            preparedStatement.setString(3, orderTO.getShippingAddress());
-//
-//	            int rowsAffected = preparedStatement.executeUpdate();
-//
-//	            if (rowsAffected > 0) {
-//	                System.out.println("Order data inserted successfully.");
-//	            } else {
-//	                System.out.println("Failed to insert order data.");
-//	            }
-//	        }
-//		}
-//		
-//	}
+
 	
 	@Override
 	public void placeOrder(OrderTO orderTO) throws SQLException {
+		long orderId = -1; 
 	    try (Connection connection = dbconnection.getConnection()) {
 	        String insertOrderSQL = "INSERT INTO `Order` (UserID, Status, shipAddress) VALUES (?, ?, ?)";
 
@@ -51,12 +31,12 @@ public class OrderDAO implements IOrderDAO{
 	            int rowsAffected = preparedStatement.executeUpdate();
 
 	            if (rowsAffected > 0) {
-	                // Retrieve the generated key(s)
+	            
 	                try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
 	                    if (generatedKeys.next()) {
-	                        long orderId = generatedKeys.getLong(1);
+	                        orderId = generatedKeys.getLong(1);
 	                        System.out.println("Order data inserted successfully. Generated key: " + orderId);
-	                        // You can store or use the generated key as needed
+	                        
 	                    } else {
 	                        System.out.println("Failed to retrieve generated key for the order.");
 	                    }
@@ -65,9 +45,34 @@ public class OrderDAO implements IOrderDAO{
 	                System.out.println("Failed to insert order data.");
 	            }
 	        }
+	        
+	        try {
+	        	addProductDetails(orderTO, orderId); 
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+	               
+	        
+	        
 	    }
 	}
 
+	private void addProductDetails(OrderTO orderTO, long id) {
+		
+		
+		try (Connection connection = dbconnection.getConnection()) {
+			
+			
+			
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
 
 	@Override
 	public void changeOrderStatus(int orderId, String status) throws SQLException {

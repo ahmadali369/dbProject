@@ -126,6 +126,7 @@ public class PlaceOrder extends JFrame {
 				
 				orderTO.setCustomerID(bllFacade.getUserid());
 				orderTO.setShippingAddress(shippingAddressPane.getText());
+				orderTO.setProductList(cart);
 				
 				bllFacade.placeOrder(orderTO);
 				
