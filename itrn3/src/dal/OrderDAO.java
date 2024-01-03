@@ -37,14 +37,14 @@ public class OrderDAO implements IOrderDAO{
 	                try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
 	                    if (generatedKeys.next()) {
 	                        orderId = generatedKeys.getLong(1);
-	                        System.out.println("Order data inserted successfully. Generated key: " + orderId);
+//	                        System.out.println("Order data inserted successfully. Generated key: " + orderId);
 	                        
 	                    } else {
-	                        System.out.println("Failed to retrieve generated key for the order.");
+//	                        System.out.println("Failed to retrieve generated key for the order.");
 	                    }
 	                }
 	            } else {
-	                System.out.println("Failed to insert order data.");
+//	                System.out.println("Failed to insert order data.");
 	            }
 	        }
 	        
@@ -65,8 +65,25 @@ public class OrderDAO implements IOrderDAO{
 		try (Connection connection = dbconnection.getConnection()) {
 			
 			for(ProductTO productTO : orderTO.getProductList()) {
-				
 				System.out.println("product id---" + productTO.getProductid());
+				
+				
+		        String insertOrderDetailSQL = "INSERT INTO OrderDetail (OrderID, ProductID, Quantity) VALUES (?, ?, ?)";
+
+
+		        try (PreparedStatement preparedStatement = connection.prepareStatement(insertOrderDetailSQL)) {
+		            preparedStatement.setInt(1, (int)id);
+		            preparedStatement.setInt(2, productTO.getProductid());
+		            preparedStatement.setInt(3, 1);
+
+		            int rowsAffected = preparedStatement.executeUpdate();
+
+//		            if (rowsAffected > 0) {
+//		                System.out.println("OrderDetail data inserted successfully.");
+//		            } else {
+//		                System.out.println("Failed to insert order detail data.");
+//		            }
+		        }
 			}
 			
 			
