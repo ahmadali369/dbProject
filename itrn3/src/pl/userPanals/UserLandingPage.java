@@ -189,13 +189,23 @@ public class UserLandingPage extends JFrame {
 				ProductTO productTO = new ProductTO();
 
 				productTO.setName((String) product.get("name"));
+				productTO.setProductid((int) product.get("productId"));
+
+				productTO.setImgPathString((String) product.get("imagePath"));
 
 				BigDecimal bigDecimalValue = new BigDecimal(product.get("price").toString());
 				Double price = bigDecimalValue.doubleValue();
-
 				productTO.setPriceDouble(price);
+
 				productTO.setDiscription((String) product.get("description"));
 				productTO.setImgBytes((byte[]) product.get("imgBytes"));
+				productTO.setQuantity((int) product.get("quantity"));
+
+				productTO.setImgKey((int) product.get("imageId"));
+
+				BigDecimal bigDecimalValue2 = new BigDecimal(product.get("cost").toString());
+				Double cost = bigDecimalValue2.doubleValue();
+				productTO.setCost(cost);
 
 				panel.add(new ProductWidget(productTO, bllFacade, false));
 

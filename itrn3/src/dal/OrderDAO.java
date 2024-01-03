@@ -5,11 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import dal.Interfaces.IOrderDAO;
 import transerferObjects.OrderTO;
+import transerferObjects.ProductTO;
 
 public class OrderDAO implements IOrderDAO{
 
@@ -62,7 +64,10 @@ public class OrderDAO implements IOrderDAO{
 		
 		try (Connection connection = dbconnection.getConnection()) {
 			
-			
+			for(ProductTO productTO : orderTO.getProductList()) {
+				
+				System.out.println("product id---" + productTO.getProductid());
+			}
 			
 			
 		}catch (Exception e) {
