@@ -9,6 +9,7 @@ import transerferObjects.UserTO;
 
 public interface IUserBLO {
 
+	public int getUserid(); 
 	boolean addNewUser(UserTO userNewTO);
 	boolean loginUser(UserTO userOldTO); 
 	void storeUserActivity(ActivityTO activityTO); 

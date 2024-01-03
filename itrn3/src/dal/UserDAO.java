@@ -16,6 +16,13 @@ public class UserDAO implements IUserDAO{
 
 	DBconfig dbconnection = DBconfig.getInstance();
 	
+	int userid = -1; 
+	
+	public int getUserid() {
+		return userid;
+	}
+
+
 	@Override
 	public boolean addNewUser(UserTO userNewTO) throws SQLException {
 		Connection connection = null;
@@ -33,9 +40,23 @@ public class UserDAO implements IUserDAO{
 				preparedStatement.setString(4, userNewTO.getPassword());
 				preparedStatement.setString(5, userNewTO.getAddress());
 
-				preparedStatement.executeUpdate();
-				connection.commit();
+//				preparedStatement.executeUpdate();
+				
 
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                	connection.commit();
+                    if (resultSet.next()) {
+                        int userID = resultSet.getInt("UserID");
+                        userid = userID; 
+                        
+//                        System.out.println("Login successful. UserID: " + userID);
+                    } else {
+//                        System.out.println("Invalid email address or password.");
+                    }
+                }
+				
+				
+				
 				return true;
 
 			}
@@ -72,10 +93,11 @@ public class UserDAO implements IUserDAO{
 
                 try (ResultSet resultSet = preparedStatement.executeQuery()) {
                     if (resultSet.next()) {
-                        return true; 
+                        int userID = resultSet.getInt("UserID");
+                        userid = userID; 
+                        System.out.println("Login successful. UserID: " + userID);
                     } else {
-
-                        return false; 
+                        System.out.println("Invalid email address or password.");
                     }
                 }
             }

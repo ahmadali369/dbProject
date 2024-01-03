@@ -10,7 +10,7 @@ import transerferObjects.UserTO;
 public interface IUserDAO {
 
 
-	
+	public int getUserid(); 
 	boolean addNewUser(UserTO userNewTO)throws SQLException;
 	boolean loginUser(UserTO userOldTO)throws SQLException; 
 	void storeUserActivity(ActivityTO activityTO)throws SQLException; 

@@ -1,5 +1,6 @@
 package dal;
 
+import java.awt.AlphaComposite;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -122,6 +123,12 @@ public class DalFacade implements IDalFacade {
 		// TODO Auto-generated method stub
 		dalPO.getUserDAO().deleteUser(id);
 		
+	}
+
+	@Override
+	public int getUserid() {
+		// TODO Auto-generated method stub
+		return dalPO.getUserDAO().getUserid();
 	}
 
 }

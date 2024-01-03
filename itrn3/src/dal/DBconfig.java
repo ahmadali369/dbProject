@@ -150,6 +150,7 @@ public class DBconfig {
                     "UserID INT," +
                     "OrderDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP," +
                     "Status VARCHAR(50) NOT NULL," +
+                    "shipAddress varchar(255)," +
                     "FOREIGN KEY (UserID) REFERENCES User(UserID)" +
                     ")";
             statement.executeUpdate(createOrderTableSQL);

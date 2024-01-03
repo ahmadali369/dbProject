@@ -80,4 +80,10 @@ public class UserBLO implements IUserBLO {
 
 	}
 
+	@Override
+	public int getUserid() {
+		// TODO Auto-generated method stub
+		return dalFacade.getUserid();
+	}
+
 }

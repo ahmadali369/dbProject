@@ -145,4 +145,10 @@ public class BllFacade implements IBLLFacade {
 		bllPo.getUserBLO().deleteUser(id);
 	}
 
+	@Override
+	public int getUserid() {
+		// TODO Auto-generated method stub
+		return bllPo.getUserBLO().getUserid();
+	}
+
 }
