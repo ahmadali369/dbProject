@@ -121,10 +121,15 @@ public class PlaceOrder extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				
-				OrderTO orderTO= new OrderTO();  
+				OrderTO orderTO= new OrderTO();
+				orderTO.setStatus("pending");
 				
-//				System.out.println("-----" +bllFacade.getUserid());
-//				System.out.println("-------" + shippingAddressPane.getText());
+				orderTO.setCustomerID(bllFacade.getUserid());
+				orderTO.setShippingAddress(shippingAddressPane.getText());
+				
+				bllFacade.placeOrder(orderTO);
+				
+
 				
 			}
 		});
